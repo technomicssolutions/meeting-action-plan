@@ -1,0 +1,17 @@
+<div class="header">
+	{% if user.is_authenticated %}
+		<div class="menu">
+			{% if user.is_superuser %}
+				<ul id="menu_div">
+					<li>Department</li>
+						<ul class="sub_menu">
+							<li><a href="{% url 'department' %}">Departments</a></li>
+							<li><a href="{% url 'departmentheads' %}">Department Heads</a></li>
+						</ul>
+				{% endif %}
+				<li><a href="{% url 'actionplans' %}">Action Plan</a></li>
+				<li><a href="{% url 'logout' %}">Logout</a></li>
+			</ul>
+		</div>
+	{% endif %}
+</div>

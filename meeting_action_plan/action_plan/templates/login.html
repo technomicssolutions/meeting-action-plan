@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block body_id %}home{% endblock %}
+{% block header %}
+    <div class="header"></div>
+{% endblock header %}
+{% block content %}
+    <div class="login">
+                
+        <form  action="{% url 'login' %}" autocomplete="on" method ="post">{% csrf_token %}
+            <h1> Login</h1>
+                <p>
+                    <label for="username">Username</label>
+                            <input id="username" name="username" required="required" type="text"/>
+                </p>
+                        
+                <p>
+                    <label for="password">Password </label>
+                    <input id="password" name="password" required="required" type="password" />
+                </p><br>
+                        
+                <p class="signin_button">
+                    {% if message %}
+                        <div>{{message}}</div>
+                    {% endif %}
+                    <input type="submit" value="login"/>
+                </p>
+                        
+        </form>
+    </div>
+{% endblock content %}
