@@ -1,0 +1,103 @@
+table{
+	width:30%;
+	margin: auto;
+}
+table,th,td
+{
+	padding:15px;
+	border:1px ;
+	border-collapse:collapse
+}
+td{
+	border:none;
+}
+.header {
+	background-color: #ADD8E6;
+	width: 100% !important;
+	min-height: 100px !important;
+	margin: auto !important;
+	color: #FFFFFF;
+	font-size: 15px;
+	font-weight: bold;
+	display: block;
+	float: left;
+	height: auto;
+}
+.container {
+	width: 100% !important;
+	margin: auto ;
+	height: auto ;
+	float: left;
+}
+.menu li{
+
+	float: left;
+	list-style: none;
+	
+}
+.login {
+	width: 30%;
+	margin: auto;
+
+	
+}
+.login h1{
+	background-color: #add8e6;
+	width: 100%;
+	margin: auto;
+	height: auto;
+}
+form {
+	border-color: #f3f3f3;
+    border-width: 5px;
+    display: block;
+    float: left;
+    margin: auto;
+    min-height: 100%;
+    width: 100%;
+    text-align: center;
+}
+.alert-info h4 {
+  color: #3a87ae;
+}
+.content .login{
+
+	margin-top: 200px;
+}
+.content h1{
+	width:100%;
+	margin: auto;
+	background-color:  #bce8f1;
+}
+.main_content{
+	background-color: #f3f3f3;
+}
+ 
+.content {
+	float: left;
+	width: 100%;
+	margin: auto;
+	min-height: 540px;
+	padding-bottom: 30px;
+	height: 100% !important;
+}
+.department {
+	width:30%;
+	margin: auto;
+	text-align: center;
+}
+.user {
+	width:30%;
+	margin: auto;
+	text-align: center;
+}
+.action {
+	width:100%;
+	margin: auto;
+	text-align: center;
+}
+
+.errorlist li{
+	color: red;
+	list-style: none;
+}

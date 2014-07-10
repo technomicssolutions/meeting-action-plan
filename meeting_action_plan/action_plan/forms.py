@@ -6,13 +6,13 @@ class DepartmentForm(ModelForm):
 	class Meta:
 
 		model = Department
-		fields = ['name']
+		fields = ['name','head']
 
-class DepartmentHeadForm(ModelForm):
-	class Meta:
+# class DepartmentHeadForm(ModelForm):
+# 	class Meta:
 
-		model = DepartmentHead
-		fields = ['department', 'user']
+# 		model = DepartmentHead
+# 		fields = ['department', 'user']
 
 class ActionPlanForm(ModelForm):
 	class Meta:

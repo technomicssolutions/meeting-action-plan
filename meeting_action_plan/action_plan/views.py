@@ -9,10 +9,11 @@ from django.views.generic.base import View
 from django.views import generic
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from action_plan.forms import DepartmentForm,ActionPlanForm,DepartmentHeadForm
+from action_plan.forms import DepartmentForm,ActionPlanForm
 
-def home(request):
-    return render(request, 'home.html', {})
+class Home(View):
+    def get(request):
+        return render(request, 'home.html', {})
 
 
 class Login(View):
@@ -47,12 +48,12 @@ class DepartmentView(generic.ListView):
         department = Department.objects.order_by('name')
         return department
 
-class DepartmentHeadView(generic.ListView):
-    template_name = 'departmentheads.html'
-    context_object_name = 'latest_departmenthead_list'
+class UserView(generic.ListView):
+    template_name = 'users.html'
+    context_object_name = 'latest_user_list'
     def get_queryset(self):
-        departmentheads = DepartmentHead.objects.order_by('department')
-        return departmentheads
+        users = User.objects.order_by('username')
+        return users
 
 class ActionPlanView(generic.ListView):
     template_name = 'actionplan.html'
@@ -62,32 +63,38 @@ class ActionPlanView(generic.ListView):
         return actionplans
 
 class AddDepartmentView(View):
-    def get(self,request,*args,**kwargs):
-        if request.method == 'GET':
-            form = DepartmentForm()
-            return render(request, 'add_departments.html', {"form":form, })
+    def get(self, request, *args, **kwargs):
+        users = User.objects.all()
+        return render(request, 'add_department.html', {'users': users})
+    def post(self, request, *args, **kwargs):
+        department = Department() 
+        department.name = request.POST['name']
+        user_id=request.POST['user_id']
+        if user_id != 'None': 
+            user = Department.objects.get(id=user_id)       
+            department.head = user
+        department.save()
+        return HttpResponseRedirect(reverse('department'))
 
-    def post(self,request,*args,**kwargs):
-        if request.method == 'POST':
-            form = DepartmentForm(request.POST)
-            print form
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect(reverse('department'))
-
-class AddDepartmentHeadView(View):
-    def get(self,request,*args,**kwargs):
-        if request.method == 'GET':
-            form = DepartmentHeadForm()
-            return render(request, 'add_departmenthead.html', {"form":form, })
-
-    def post(self,request,*args,**kwargs):
-        if request.method == 'POST':
-            form = DepartmentHeadForm(request.POST)
-            print form
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect(reverse('departmentheads'))
+class AddUserView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'add_user.html',{})
+    def post(self, request, *args, **kwargs):
+        try:
+            user = User.objects.get(username=request.POST['username'])
+            context = {
+                'message': 'Sorry..This username already exists'
+            }
+            return render(request, 'add_user.html',context)
+        except:
+            user = User()
+            user.username = request.POST['username']
+            user.first_name = User(request.POST['firstname'])
+            user.last_name = User(request.POST['lastname'])
+            user.save()
+            user.set_password(request.POST['password'])
+            user.save()    
+            return HttpResponseRedirect('users')
 
 class AddActionPlanView(View):
     def get(self,request,*args,**kwargs):
@@ -102,7 +109,7 @@ class AddActionPlanView(View):
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect(reverse('actionplans'))
-
+            return render(request,'add_actionplan.html', {"form":form, })
 class DeleteDepartment(View):
     def get(self,request,*args,**kwargs):
         department_id = kwargs['department_id']
@@ -110,12 +117,13 @@ class DeleteDepartment(View):
         department.delete()
         return HttpResponseRedirect(reverse('department'))
 
-class DeleteDepartmentHead(View):
+class DeleteUser(View):
     def get(self,request,*args,**kwargs):
-        departmenthead_id = kwargs['departmenthead_id']
-        departmenthead = DepartmentHead.objects.get(id=departmenthead_id)
-        departmenthead.delete()
-        return HttpResponseRedirect(reverse('departmenthead'))
+        user_id = kwargs['user_id']
+        user = User.objects.get(id=user_id)
+
+        user.delete()
+        return HttpResponseRedirect(reverse('users'))
 
 class DeleteActionPlan(View):
     def get(self,request,*args,**kwargs):
@@ -145,26 +153,30 @@ class EditDepartment(View):
             form.save()
             return HttpResponseRedirect(reverse('department'))
 
-class EditDepartmentHead(View):
+class EditUser(View):
 
     def get(self,request,*args,**kwargs):
-        departmenthead_id = kwargs['departmenthead_id']
-        departmenthead = DepartmentHead.objects.get(id=departmenthead_id)
+        user_id = kwargs['user_id']
+        user = User.objects.get(id=user_id)
         if request.method == 'GET':
-            form = DepartmentHeadForm(instance=departmenthead)
             context = {
-                'form':form,
-                'departmenthead_id':departmenthead_id,
+                'user':user,
+                'user_id':user_id,
             }
-            return render(request,'edit_department_head.html',context)
-
-    def post(self,request,*args,**kwargs):
-        departmenthead_id = kwargs['departmenthead_id']
-        departmenthead = DepartmentHead.objects.get(id=departmenthead_id)
-        if request.method == 'POST':   
-            form = DepartmentHeadForm(request.POST,instance=departmenthead)
-            form.save()
-            return HttpResponseRedirect(reverse('departmenthead'))
+            return render(request,'edit_user.html',context)
+    def post(self, request, *args, **kwargs):
+        try:
+            user_id = kwargs['user_id']
+            user = User.objects.get(id=user_id)
+            
+            return render(request, 'edit_user.html',{})
+        except:
+            user.username = request.POST['username']
+            user.first_name = User(request.POST['firstname'])
+            user.last_name = User(request.POST['lastname'])
+            user.save()
+               
+            return HttpResponseRedirect(reverse('users'))
 
 class EditActionPlan(View):
 
@@ -186,3 +198,6 @@ class EditActionPlan(View):
             form = ActionPlanForm(request.POST,instance=actionplan)
             form.save()
             return HttpResponseRedirect(reverse('actionplans'))
+
+
+    

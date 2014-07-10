@@ -1,25 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="alert alert-info" align="Center"><h4>Departments</h4></div>
-{% if latest_department_list %}
-	<table>
-		<tr style="background-color:#000000;color:white;">
-			<th>Department</th>
-			<th></th>
-			<th></th>
-		</tr>
-		{% for department in latest_department_list %}
-			<tr>
-				<td>{{department.name}}</td>
-				<td><a href="{% url 'editdepartment' department.id %}">Edit</a></td>
-				<td><a href="{% url 'deletedepartment' department.id %}">Delete</a></td>
+<div class="department">
+	{% if latest_department_list %}
+		<table>
+			<tr style="background-color:#000000;color:white;">
+				<th>Department</th>
+				<th>Department Head</th>
+				<th></th>
+				<th></th>
 			</tr>
-		{% endfor %}
-	</table>
-	<a href="{% url 'add_departments' %}">
-        <input type='submit' value='Add a new Department'/>
-    </a>
-{% else %}
-    <p>No Departments are available.</p>
-{% endif %}
+			{% for department in latest_department_list %}
+				<tr>
+					<td>{{department.name}}</td>
+					{% if department.head == None %}
+						<td><a href="{% url 'editdepartment' department.id %}">Add a head</a></td>
+					{% else %}
+						<td>{{department.head}}</td>
+					{% endif %}
+					<td><a href="{% url 'editdepartment' department.id %}">Edit</a></td>
+					<td><a href="{% url 'deletedepartment' department.id %}">Delete</a></td>
+				</tr>
+			{% endfor %}
+		</table>
+		<a href="{% url 'add_department' %}">
+	        <input type='submit' value='Add a new Department'/>
+	    </a>
+	{% else %}
+	    <p>No Departments are available.</p>
+	{% endif %}
+</div>
 {% endblock content %}

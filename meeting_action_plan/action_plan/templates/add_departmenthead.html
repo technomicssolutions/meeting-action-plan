@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-{% block content %}
-	<center>
-		<form method="post" action="{% url 'add_departmenthead' %}">{% csrf_token %}
-			{{form.as_p}}
-			<input type='submit' value='Submit'/>
-		</form>
-	</center>
-{% endblock content %}	

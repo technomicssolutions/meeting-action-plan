@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-{% block content %}
-	
-	<form method="post" action="{% url 'editdepartmenthead' departmenthead_id %}">{% csrf_token %}
-		{{ form.as_p}}
-		<input type='submit' value='Submit'/>
-	</form>
-	
-{% endblock content %}

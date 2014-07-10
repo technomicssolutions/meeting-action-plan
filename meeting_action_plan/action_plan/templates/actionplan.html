@@ -1,39 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="alert alert-info" align="Center"><h4>Action Plans</h4></div>
-{% if latest_actionplan_list %}
-	<table>
-		<tr style="background-color:#000000;color:white;">
-			<th>Date Opened</th>
-			<th>Requirement/Action</th>
-			<th>Focal</th>
-			<th>Proirity</th>
-			<th>Status</th>
-			<th>Date Closed</th>
-			<th>Comments/Update</th>
-			<th>Department</th>
-			<th></th>
-			<th></th>
-		</tr>
-		{% for actionplan in latest_actionplan_list %}
-			<tr>
-				<td>{{actionplan.date_opened}}</td>
-				<td>{{actionplan.action}}</td>
-				<td>{{actionplan.focal}}</td>
-				<td>{{actionplan.priority}}</td>
-				<td>{{actionplan.status}}</td>
-				<td>{{actionplan.date_closed}}</td>
-				<td>{{actionplan.comments}}</td>
-				<td>{{actionplan.department.name}}</td>
-				<td><a href="{% url 'editactionplan' actionplan.id %}">Edit</a></td>
-				<td><a href="{% url 'delete_action_plan' actionplan.id %}">Delete</a></td>
+<div class="action">
+	{% if latest_actionplan_list %}
+		<table>
+			<tr style="background-color:#000000;color:white;">
+				<th>Date Opened</th>
+				<th>Requirement/Action</th>
+				<th>Focal</th>
+				<th>Proirity</th>
+				<th>Status</th>
+				<th>Date Closed</th>
+				<th>Comments/Update</th>
+				<th>Department</th>
+				<th></th>
+				<th></th>
+				
 			</tr>
-		{% endfor %}
-	</table>
-	<a href="{% url 'add_actionplan' %}">
-        <input type='submit' value='Add a new action plan'/>
-    </a>
-{% else %}
-    <p>No Action Plans are available.</p>
-{% endif %}
+			{% for actionplan in latest_actionplan_list %}
+				<tr>
+					<td>{{actionplan.date_opened}}</td>
+					<td>{{actionplan.action}}</td>
+					<td>{{actionplan.focal}}</td>
+					<td>{{actionplan.priority}}</td>
+					<td>{{actionplan.status}}</td>
+					<td>{{actionplan.date_closed}}</td>
+					<td>{{actionplan.comments}}</td>
+					<td>{{actionplan.department.name}}</td>
+					{% if user.is_superuser or user == actionplan.department.head %}
+						<td><a href="{% url 'editactionplan' actionplan.id %}">Edit</a></td>
+						<td><a href="{% url 'delete_action_plan' actionplan.id %}">Delete</a></td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+		</table>
+		<a href="{% url 'add_actionplan' %}">
+	        <input type='submit' value='Add a new action plan'/>
+	    </a>
+	{% else %}
+	    <p>No Action Plans are available.</p>
+	{% endif %}
+</div>
 {% endblock content %}

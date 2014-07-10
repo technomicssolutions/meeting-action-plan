@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="alert alert-info" align="Center"><h4>Users</h4></div>
+<div class="user">
+	{% if latest_user_list %}
+		<table>
+			<tr style="background-color:#000000;color:white;">
+				<th>User</th>
+				
+				<th></th>
+				<th></th>
+			</tr>
+			{% for user in latest_user_list %}
+				{% if user.is_superuser == False %}
+					<tr>
+						<td>{{user.username}}</td>
+					
+						<td><a href="{% url 'edituser' user.id %}">Edit</a></td>
+
+						<td><a href="{% url 'deleteuser' user.id %}">Delete</a></td>
+					</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+		<a href="{% url 'add_user' %}">
+	        <input type='submit' value='Add a new user'/>
+	    </a>
+	{% else %}
+	    <p>No users are available.</p>
+	{% endif %}
+</div>
+{% endblock content %}
