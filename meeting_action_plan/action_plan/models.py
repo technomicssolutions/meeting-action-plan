@@ -9,8 +9,8 @@ PRIORITY_CHOICES  =(
             ('3','three'),
     )
 STATUS_CHOICES =(
-            ('O','Open'),
-            ('C','Closed'),
+            ('Open','Open'),
+            ('Closed','Closed'),
     )
 class Department(models.Model):
 
@@ -26,7 +26,7 @@ class ActionPlan(models.Model):
     action = models.TextField('Requirement/Action', null=True, blank=True)
     focal = models.CharField('Focal', max_length=200, null=True, blank=True)
     priority = models.CharField( max_length=1, choices=PRIORITY_CHOICES)
-    status = models.CharField( max_length=5, choices=STATUS_CHOICES)
+    status = models.CharField( max_length=10, choices=STATUS_CHOICES)
     date_closed = models.DateField('Date Closed', auto_now_add=True)
     comments = models.TextField('Comments/Update', null=True, blank=True)
     department = models.ForeignKey(Department, null=True, blank=True)

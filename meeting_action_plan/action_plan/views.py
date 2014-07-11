@@ -12,7 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from action_plan.forms import DepartmentForm,ActionPlanForm
 
 class Home(View):
-    def get(request):
+    def get(self,request):
         return render(request, 'home.html', {})
 
 
@@ -65,13 +65,14 @@ class ActionPlanView(generic.ListView):
 class AddDepartmentView(View):
     def get(self, request, *args, **kwargs):
         users = User.objects.all()
+        # print users, 'iuiiuiu'
         return render(request, 'add_department.html', {'users': users})
     def post(self, request, *args, **kwargs):
         department = Department() 
         department.name = request.POST['name']
         user_id=request.POST['user_id']
         if user_id != 'None': 
-            user = Department.objects.get(id=user_id)       
+            user = User.objects.get(id=user_id)       
             department.head = user
         department.save()
         return HttpResponseRedirect(reverse('department'))
@@ -94,22 +95,50 @@ class AddUserView(View):
             user.save()
             user.set_password(request.POST['password'])
             user.save()    
-            return HttpResponseRedirect('users')
+            return HttpResponseRedirect(reverse('users'))
 
 class AddActionPlanView(View):
     def get(self,request,*args,**kwargs):
+        departments = Department.objects.all()
+        plan = ActionPlan.objects.all()
         if request.method == 'GET':
-            form = ActionPlanForm()
-            return render(request, 'add_actionplan.html', {"form":form, })
+            
+            formplan = ActionPlanForm()
+            context ={
+                'plan':plan,
+                'departments':departments,
+                'formplan':formplan,
+            }
+            return render(request, 'add_actionplan.html', context)
 
     def post(self,request,*args,**kwargs):
         if request.method == 'POST':
             form = ActionPlanForm(request.POST)
+            departments = Department.objects.all()
+            plan = ActionPlan.objects.all()
             print form
             if form.is_valid():
                 form.save()
+                if request.user.is_superuser:
+                    department_id = request.POST['department_id']
+                    department = Department.objects.get(id=department_id)
+                    plan = ActionPlan.objects.latest('id')
+                    plan.department = department
+                    plan.save()
+                else :
+                    department_name = request.POST['department_name']
+                    department = Department.objects.get(name=department_name)
+                    plan = ActionPlan.objects.latest('id')
+                    plan.department =department
+                    plan.save()
                 return HttpResponseRedirect(reverse('actionplans'))
-            return render(request,'add_actionplan.html', {"form":form, })
+            
+            context ={
+                'plan':plan,
+                'departments':departments,
+                'formplan':form,
+            }
+            return render(request, 'add_actionplan.html', context)
 class DeleteDepartment(View):
     def get(self,request,*args,**kwargs):
         department_id = kwargs['department_id']
@@ -157,10 +186,10 @@ class EditUser(View):
 
     def get(self,request,*args,**kwargs):
         user_id = kwargs['user_id']
-        user = User.objects.get(id=user_id)
+        users = User.objects.get(id=user_id)
         if request.method == 'GET':
             context = {
-                'user':user,
+                'users':users,
                 'user_id':user_id,
             }
             return render(request,'edit_user.html',context)

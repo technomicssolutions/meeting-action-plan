@@ -2,8 +2,21 @@
 {% block content %}
 	<center>
 		<form method="post" action="{% url 'add_actionplan' %}">{% csrf_token %}
-			{{form.as_p}}
+			{{formplan.as_p}}
+			<label>Department Name:</label>
+			{%if user.is_superuser%}
+			
+				<select name="department_id">
+					{% for department in departments %}
+						<option value="{{department.id}}">{{department.name}}</option>
+					{% endfor %}
+				</select>
+			{% else %}
+				<input type="text" name="department_name" value="{{user.department_set.all.0.name}}" readonly>
+		
+			{% endif %}
 			<input type='submit' value='Submit'/>
+			
 		</form>
 	</center>
 {% endblock content %}	

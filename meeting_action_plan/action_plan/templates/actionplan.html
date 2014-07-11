@@ -33,12 +33,13 @@
 					{% endif %}
 				</tr>
 			{% endfor %}
-		</table>
-		<a href="{% url 'add_actionplan' %}">
-	        <input type='submit' value='Add a new action plan'/>
-	    </a>
-	{% else %}
+		</table>		
+	{% else %}		
 	    <p>No Action Plans are available.</p>
 	{% endif %}
+
+	<a href="{% url 'add_actionplan' %}">
+        <input type='submit' value='Add a new action plan'/>
+    </a>
 </div>
 {% endblock content %}

@@ -23,11 +23,13 @@
 				</tr>
 			{% endfor %}
 		</table>
-		<a href="{% url 'add_department' %}">
-	        <input type='submit' value='Add a new Department'/>
-	    </a>
+		
 	{% else %}
-	    <p>No Departments are available.</p>
+			    <p>No Departments are available.</p>
 	{% endif %}
+	<a href="{% url 'add_department' %}">
+        <input type='submit' value='Add a new Department'/>
+    </a>
+
 </div>
 {% endblock content %}

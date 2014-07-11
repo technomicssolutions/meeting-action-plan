@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="post" action="{% url 'add_department' %}">{% csrf_token %}
-	<label for="name">Department Name:</label>
-    <input id="name" name="name" />
-    <select name="user_id">
-    	<option value="None">None</option>
-    	{% for user in users %}
-    		{% if not user.is_superuser %}
-    			<option value="{{user.id}}">{{user.first_name}}</option>
-    		{% endif %}
-    	{% endfor %}
-    </select>
-	<input type='submit' value='Submit'/>
-</form>
+<div class="add_department">
+    <form method="post" action="{% url 'add_department' %}">{% csrf_token %}
+    	<label for="name">Department Name:</label>
+        <input id="name" name="name" />
+        <label>Department Head:</label>
+        <select name="user_id">
+        	<option value="None">None</option>
+        	{% for user in users %}
+        		{% if not user.is_superuser %}
+        			<option value="{{user.id}}">{{user.first_name}}</option>
+        		{% endif %}
+        	{% endfor %}
+        </select>
+    	<input type='submit' value='Submit'/>
+    </form>
+</div>
 {% endblock %}

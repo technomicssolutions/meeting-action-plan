@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-	<center>
+	<body>
 		<form method="post" action="{% url 'add_user' %}">{% csrf_token %}
 			<ul>
                     <div class="department_fields">
@@ -25,5 +25,5 @@
                     </div>
 			<input type='submit' value='Submit'/>
 		</form>
-	</center>
+	</body>
 {% endblock content %}	

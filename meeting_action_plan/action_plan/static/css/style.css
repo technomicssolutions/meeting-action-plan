@@ -1,15 +1,22 @@
 table{
-	width:30%;
+	width:388px;
 	margin: auto;
 }
 table,th,td
 {
 	padding:15px;
 	border:1px ;
-	border-collapse:collapse
+	border-collapse:collapse;
+	width: 100%;
+	margin: auto;
 }
-td{
-	border:none;
+.logo {
+	font-size:29px;
+	padding:8px 0 8px 0;
+    font-weight: bold;
+    color: black;
+    float: left;
+    margin-top: 30px;
 }
 .header {
 	background-color: #ADD8E6;
@@ -23,21 +30,31 @@ td{
 	float: left;
 	height: auto;
 }
+
 .container {
 	width: 100% !important;
 	margin: auto ;
 	height: auto ;
 	float: left;
 }
+.menu{
+	float:right;
+	margin-top: 40px;
+	margin-right: 10px;
+
+}
 .menu li{
 
 	float: left;
+	font-size: 15px;
 	list-style: none;
 	
 }
 .login {
-	width: 30%;
+	width: 28%;
 	margin: auto;
+	display: inline-block;
+	
 
 	
 }
@@ -47,32 +64,60 @@ td{
 	margin: auto;
 	height: auto;
 }
-form {
-	border-color: #f3f3f3;
-    border-width: 5px;
-    display: block;
-    float: left;
+.login form{
+	padding: 0px !important;
+	/*margin-top: 28px;
+	margin-left: 0px; 
+	padding-left: 0px; 
+	padding-right: 0px;*/
+	background-color: #f3f3f3;
+}
+/*form {
+    width: 30%;
     margin: auto;
-    min-height: 100%;
-    width: 100%;
-    text-align: center;
+    display: inline-block;
+    background-color: #f3f3f3;
+}*/
+.add_department label{
+	width: 30% !important; 
+	margin: auto !important;
+	float: left;
+	
+}
+.add_department form{
+	width: 30%;
+	margin-top: 50px;
+	padding: 10px;
+}
+body {
+	text-align: center;
 }
 .alert-info h4 {
   color: #3a87ae;
 }
 .content .login{
-
-	margin-top: 200px;
+	
+	width: 20%;
+	margin-top: 50px;
+	margin: auto;
 }
-.content h1{
+/*.content h1{
 	width:100%;
 	margin: auto;
 	background-color:  #bce8f1;
-}
+*/}
 .main_content{
 	background-color: #f3f3f3;
 }
- 
+ .add_department{
+ 	width:35%;
+	margin: auto;
+	text-align: center;
+	background-color: #f3f3f3;
+ }
+ a:hover , a:focus {
+ 	text-decoration: none !important;
+ }
 .content {
 	float: left;
 	width: 100%;
@@ -81,20 +126,30 @@ form {
 	padding-bottom: 30px;
 	height: 100% !important;
 }
+.content form{
+	width: 100%;
+	margin-top: 30px;
+	padding: 10px;
+}
+
 .department {
 	width:30%;
 	margin: auto;
 	text-align: center;
+	background-color: #f3f3f3;
+
 }
 .user {
 	width:30%;
 	margin: auto;
 	text-align: center;
+	background-color: #f3f3f3;
 }
 .action {
-	width:100%;
+	width:80%;
 	margin: auto;
 	text-align: center;
+	background-color: #f3f3f3;
 }
 
 .errorlist li{
