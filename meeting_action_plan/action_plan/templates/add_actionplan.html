@@ -1,22 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
-	<center>
-		<form method="post" action="{% url 'add_actionplan' %}">{% csrf_token %}
-			{{formplan.as_p}}
-			<label>Department Name:</label>
-			{%if user.is_superuser%}
-			
-				<select name="department_id">
-					{% for department in departments %}
-						<option value="{{department.id}}">{{department.name}}</option>
-					{% endfor %}
-				</select>
-			{% else %}
-				<input type="text" name="department_name" value="{{user.department_set.all.0.name}}" readonly>
+<div class="alert alert-info" align="Center"><h4>Add Action Plan</h4></div>
+
+<div class="add_plan">
+	<form method="post" action="{% url 'add_actionplan' %}">{% csrf_token %}
+		{% for field in formplan.visible_fields %}
+			<label> {{field.label}}</label>
+				{{field}}
+				{{field.errors}}
+		{% endfor %}
+		<label>Department Name:</label>
+		{%if user.is_superuser%}
 		
-			{% endif %}
-			<input type='submit' value='Submit'/>
-			
-		</form>
-	</center>
+			<select name="department_id">
+				{% for department in departments %}
+					<option value="{{department.id}}">{{department.name}}</option>
+				{% endfor %}
+			</select>
+		{% else %}
+			<input type="text" name="department_name" value="{{user.department_set.all.0.name}}" readonly>
+	
+		{% endif %}
+		<input type='submit' value='Submit'/>
+	</form>
+</div>
 {% endblock content %}	

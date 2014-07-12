@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-	
+<div class="alert alert-info" align="Center"><h4>Edit Department</h4></div>
+
+<div class="edit_department">
 	<form method="post" action="{% url 'editdepartment' department_id %}">{% csrf_token %}
 		{{ form.as_p}}
-		<input type='submit' value='Submit'/>
+		<div class="edit_dep_button">
+			<input type='submit' value='Submit'/>
+		</div>
 	</form>
-	
+</div>
 {% endblock content %}

@@ -1,20 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 	<body>
+		<div class="alert alert-info" align="Center"><h4>Edit User</h4></div>
 		<form method="post" action="{% url 'edituser' user_id %}">{% csrf_token %}
-			<p>
+			<div class="edit_user">
 				<label for="username">Username:</label>
 				<input type="text" name="username" value="{{users.username}}" />
-			</p>
-			<p>	
+			</div class="edit_user">
+			<div class="edit_user">	
 				<label for="firstname">First Name:</label>
 				<input type="text" name="firstname" value="{{users.first_name}}"/>
-			</p>
-			<p> 
+			</div>
+			<div class="edit_user"> 
 				<label for="lastname">Last Name:</label>
 				<input type="text" name="lastname" value="{{users.last_name}}" />
-			</p>
-			<input type='submit' value='Submit'/>
+			</div>
+			<div class="edit_user_button">
+				<input type='submit' value='Submit'/>
+			</div>
+			
 		</form>
 	</body>
 {% endblock content %}

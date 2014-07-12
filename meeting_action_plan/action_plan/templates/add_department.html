@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="alert alert-info" align="Center"><h4>Add Department</h4></div>
+
 <div class="add_department">
     <form method="post" action="{% url 'add_department' %}">{% csrf_token %}
     	<label for="name">Department Name:</label>
-        <input id="name" name="name" />
+        <input id="name" type="text" name="name" />
         <label>Department Head:</label>
         <select name="user_id">
         	<option value="None">None</option>
@@ -13,7 +15,10 @@
         		{% endif %}
         	{% endfor %}
         </select>
-    	<input type='submit' value='Submit'/>
+    	<div class="add_department_button">
+            <input type='submit' value='Submit'/>
+        </div>
+        
     </form>
 </div>
 {% endblock %}

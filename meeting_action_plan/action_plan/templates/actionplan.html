@@ -37,9 +37,10 @@
 	{% else %}		
 	    <p>No Action Plans are available.</p>
 	{% endif %}
-
-	<a href="{% url 'add_actionplan' %}">
-        <input type='submit' value='Add a new action plan'/>
-    </a>
+	{% if user.is_superuser or user.department_set.all %}
+		<a href="{% url 'add_actionplan' %}">
+	        <input type='submit' value='Add a new action plan'/>
+	    </a>
+	{% endif %}
 </div>
 {% endblock content %}

@@ -1,22 +1,32 @@
-table{
-	width:388px;
+.user table{
+	width:100%;
 	margin: auto;
 }
-table,th,td
+.user td
 {
 	padding:15px;
 	border:1px ;
 	border-collapse:collapse;
-	width: 100%;
+	
 	margin: auto;
 }
+.user th
+{
+	padding-top:0px;
+	padding-bottom:0px;
+	
+	height: 60px;
+}
 .logo {
-	font-size:29px;
+	font-size:19px;
 	padding:8px 0 8px 0;
     font-weight: bold;
-    color: black;
+    color: #FFFFFF;
     float: left;
-    margin-top: 30px;
+    margin-top: 63px;
+    text-align: center;
+    display: inline-block;
+
 }
 .header {
 	background-color: #ADD8E6;
@@ -48,7 +58,11 @@ table,th,td
 	float: left;
 	font-size: 15px;
 	list-style: none;
+	color: #008000;
 	
+}
+.menu a{
+	color: #FFFFFF;
 }
 .login {
 	width: 28%;
@@ -60,24 +74,55 @@ table,th,td
 }
 .login h1{
 	background-color: #add8e6;
+	color:  	#FFFFFF;
 	width: 100%;
 	margin: auto;
 	height: auto;
+	font-size: 30px;
+	float: left;
 }
 .login form{
 	padding: 0px !important;
-	/*margin-top: 28px;
-	margin-left: 0px; 
-	padding-left: 0px; 
-	padding-right: 0px;*/
 	background-color: #f3f3f3;
+	margin-top: 60px;
+	height: auto;
 }
-/*form {
-    width: 30%;
-    margin: auto;
-    display: inline-block;
-    background-color: #f3f3f3;
-}*/
+.login_sub label{
+	
+	float: left;
+	padding-right: 14px;
+}
+.login_sub {
+	width: 100%;
+	margin: auto;
+	float: left;
+	height: auto;
+	padding-left: 16px;
+	 padding-top: 21px;
+}
+.login_sub input[type="text"]{
+	width: 51%;
+	margin: auto;
+	float: left;
+	height: auto;
+
+}
+
+}
+.login_sub  input[type="password"]{
+	width: 51%;
+	margin: auto;
+	float: left;
+	height: auto;
+
+	
+}
+.signin_button{
+	
+	margin: auto;
+	padding-bottom: 13px
+}
+
 .add_department label{
 	width: 30% !important; 
 	margin: auto !important;
@@ -101,13 +146,11 @@ body {
 	margin-top: 50px;
 	margin: auto;
 }
-/*.content h1{
-	width:100%;
-	margin: auto;
-	background-color:  #bce8f1;
-*/}
+
 .main_content{
 	background-color: #f3f3f3;
+	padding-top: 1px;
+	padding-bottom: 13px;
 }
  .add_department{
  	width:35%;
@@ -126,33 +169,233 @@ body {
 	padding-bottom: 30px;
 	height: 100% !important;
 }
-.content form{
+.add_department form{
 	width: 100%;
 	margin-top: 30px;
 	padding: 10px;
 }
 
-.department {
+.add_user {
 	width:30%;
 	margin: auto;
-	text-align: center;
+	padding-top: 30px;
 	background-color: #f3f3f3;
+	padding-bottom: 21px;
+	 margin-top: 37px;
+}
+.user_fields{
+
+	width: 100%;
+	margin: auto;
+}
+.user_fields label{
+
+	width: 40%;
+	margin: auto;
+	float: left;
+}
+.user_fields input[type="text"], input[type="password"]{
+	
+	width: 53%;
+	margin: auto;
+	float: left;
+	margin-bottom: 12px;
 
 }
+
 .user {
-	width:30%;
+	width:34%;
 	margin: auto;
 	text-align: center;
 	background-color: #f3f3f3;
+	padding-bottom: 15px;
 }
 .action {
-	width:80%;
+	width:93%;
+	height: auto;
 	margin: auto;
 	text-align: center;
 	background-color: #f3f3f3;
+	padding-bottom: 16px;
+}
+.action table{
+	width:100%;
+	height: auto;
+	margin: auto;
+}
+.action td
+{
+	padding:38px;
+	border:1px ;
+	border-collapse:collapse;
+	width: 100%;
+	margin: auto;
+}
+.action th
+{
+	width: 100%;
+	height: 70;
+	margin: auto;
+	padding-left: 16px;
 }
 
 .errorlist li{
 	color: red;
 	list-style: none;
+}
+.edit_user{
+	width: 30%;
+	margin: auto;
+	background-color: #f3f3f3;
+	padding-top: 21px;
+}
+.edit_user label{
+	width: 37%;
+	margin: auto;
+	float: left;
+	padding-top: 7px;
+}
+.edit_user input[type="text"]{
+	
+	width: 53%;
+	margin: auto;
+	height: auto;
+
+}
+.edit_user_button{
+	background-color: #f3f3f3;
+	width: 30%;
+	margin: auto;
+	padding-bottom: 11px; 
+	padding-top: 20px;
+}
+.department{
+	width:34%;
+	margin: auto;
+	text-align: center;
+	background-color: #f3f3f3;
+	padding-bottom: 15px;
+}
+.department table{
+	width:100%;
+	margin: auto;
+}
+.department td
+{	padding:15px;
+	border:1px ;
+	border-collapse:collapse;
+	
+	margin: auto;
+}
+.department th
+{
+	padding-top:0px;
+	padding-bottom:0px;
+	
+	height: 60px;
+}
+.add_department{
+	height: 30%;
+}
+.add_department input[type="text"],select{
+	float: left;
+	height: auto;
+
+}
+.add_department_button input[type="submit"]{
+	float: left;
+	height: auto;
+}
+.edit_department{
+
+	width: 50%;
+	margin: auto;
+	height: 20%;
+	background-color: #f3f3f3;
+}
+.edit_department input[type="text"]{
+	float: left;
+	height: auto;
+	width: 34%;
+	margin: auto;
+
+}
+.edit_department label{
+	width: 35%;
+	margin: auto;
+	float: left;
+	
+}
+.edit_department select{
+	float: left;
+	height: auto;
+	width: 34%;
+	margin: auto;
+
+}
+.edit_dep_button {
+	float: left;
+}
+.add_plan {
+	width: 36%;
+	margin: auto;
+	height: 90%;
+	background-color: #f3f3f3;
+
+}
+.add_plan label {
+	float: left;
+	margin-right: 14px;
+}
+.add_plan textarea {
+	float: left;
+	height: 10%;
+}
+
+.add_plan input {
+	float: left;
+	height: auto;
+}
+.add_plan select {
+	float: left;
+}
+.add_plan form {
+	padding: 14px;
+    width: 38%;
+}
+
+.edit_plan {
+	width: 36%;
+	margin: auto;
+	height: 90%;
+	background-color: #f3f3f3;
+}
+.edit_plan label {
+	float: left;
+	margin-right: 14px;
+}
+.edit_plan textarea {
+	float: left;
+	height: 10%;
+}
+
+.edit_plan input {
+	float: left;
+}
+.edit_plan select {
+	float: left;
+}
+.edit_plan form {
+	padding: 14px;
+    width: 38%;
+}
+
+.department p{
+	color: red;
+}
+.user p{
+	color: red;
+}
+.action p{
+	color: red;
 }

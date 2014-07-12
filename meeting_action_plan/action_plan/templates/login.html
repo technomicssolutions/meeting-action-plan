@@ -9,22 +9,22 @@
                 
         <form  action="{% url 'login' %}" autocomplete="on" method ="post">{% csrf_token %}
             <h1> Login</h1>
-                <p>
-                    <label for="username">Username</label>
+                <div class="login_sub">
+                    <label for="username">Username:</label>
                             <input id="username" name="username" required="required" type="text"/>
-                </p>
+                </div>
                         
-                <p>
-                    <label for="password">Password </label>
-                    <input id="password" name="password" required="required" type="password" />
-                </p><br>
+                <div class="login_sub">
+                    <label for="password">Password: </label>
+                    <input id="password" name="password" required="required" type="password"style="height: auto;" />
+                </div><br>
                         
-                <p class="signin_button">
+                <div class="signin_button">
                     {% if message %}
                         <div>{{message}}</div>
                     {% endif %}
                     <input type="submit" value="login"/>
-                </p>
+                </div>
                         
         </form>
     </div>
