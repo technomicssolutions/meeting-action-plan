@@ -5,7 +5,7 @@
 		<div class="menu">
 			<li>{{user.username}}<img src="/static/images/user.png" width="24px" ></li>
 			{% if user.is_superuser %}		
-				<li><a href="{% url 'department' %}">Departments </a></li>
+				<li><a href="{% url 'departments' %}">Departments </a></li>
 				<li><a href="{% url 'users' %}">Users </a></li>		
 			{% endif %}
 			<li><a href="{% url 'actionplans' %}">Action Plan </a></li>

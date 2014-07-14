@@ -374,6 +374,7 @@ body {
 .edit_plan {
 	width: 36%;
 	margin: auto;
+	height: auto;
 	height: 90%;
 	background-color: #f3f3f3;
 }
@@ -418,4 +419,7 @@ body {
 .orange {
 	background-color: #ff8c00 !important;
 	width: 20% !important;
+}
+#id_focal {
+	height: auto;
 }

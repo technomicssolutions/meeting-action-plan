@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="alert alert-info" align="Center"><h4>Users</h4></div>
-<div class="user">
+<div class="user">{{latest_user_list.length}}
 	{% if latest_user_list %}
 		<table>
 			<tr style="background-color:#000000;color:white;">
