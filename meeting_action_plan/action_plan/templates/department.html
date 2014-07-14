@@ -16,7 +16,7 @@
 					{% if department.head == None %}
 						<td><a href="{% url 'editdepartment' department.id %}">Add a head</a></td>
 					{% else %}
-						<td>{{department.head}}</td>
+						<td>{{department.head.first_name}}</td>
 					{% endif %}
 					<td><a href="{% url 'editdepartment' department.id %}">Edit</a></td>
 					<td><a href="{% url 'deletedepartment' department.id %}">Delete</a></td>

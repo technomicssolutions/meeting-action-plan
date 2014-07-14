@@ -102,27 +102,23 @@
 	padding-left: 16px;
 	 padding-top: 21px;
 }
-.login_sub input[type="text"]{
+.login_sub input[type="text"],.login_sub  input[type="password"]{
 	width: 51%;
 	margin: auto;
 	float: left;
 	height: auto;
 
-}
-
-}
-.login_sub  input[type="password"]{
-	width: 51%;
-	margin: auto;
-	float: left;
-	height: auto;
-
-	
 }
 .signin_button{
+	color: #ff0000;
+}
+
+
+.signin_button input[type="submit"]{
 	
 	margin: auto;
-	padding-bottom: 13px
+	height: auto;
+	margin-top: 13px;
 }
 
 .add_department label{
@@ -196,12 +192,13 @@ body {
 	margin: auto;
 	float: left;
 }
-.user_fields input[type="text"], input[type="password"]{
+.user_fields input[type="text"],.user_fields input[type="password"]{
 	
 	width: 53%;
 	margin: auto;
 	float: left;
 	margin-bottom: 12px;
+	height: auto;
 
 }
 
@@ -311,7 +308,7 @@ body {
 
 	width: 50%;
 	margin: auto;
-	height: 20%;
+	height: 30%;
 	background-color: #f3f3f3;
 }
 .edit_department input[type="text"]{
@@ -319,12 +316,19 @@ body {
 	height: auto;
 	width: 34%;
 	margin: auto;
+	padding-top: 4px; 
+	border-top-width: 0px; 
+	margin-top: 14px;
 
 }
 .edit_department label{
-	width: 35%;
+	width: 52%;
 	margin: auto;
 	float: left;
+	padding-bottom: 8px; 
+	border-bottom-width: 17px; 
+	margin-bottom: 1px; 
+	padding-top: 16px
 	
 }
 .edit_department select{
@@ -332,10 +336,12 @@ body {
 	height: auto;
 	width: 34%;
 	margin: auto;
+	margin-top: 11px;
 
 }
 .edit_dep_button {
 	float: left;
+	padding-top: 14px;
 }
 .add_plan {
 	width: 36%;
@@ -392,13 +398,13 @@ body {
 }
 
 .department p{
-	color: red;
+	color: #ff0000;
 }
 .user p{
-	color: red;
+	color: #ff0000;
 }
 .action p{
-	color: red;
+	color: #ff0000;
 }
 
 .red {

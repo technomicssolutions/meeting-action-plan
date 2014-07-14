@@ -179,11 +179,12 @@ class EditDepartment(View):
         department_id = kwargs['department_id']
         department = Department.objects.get(id=department_id)
         user_id=request.POST['user_id']
+        print user_id
         if request.method == 'POST':   
             department.name = request.POST['name']
-            
-            user = User.objects.get(id=user_id)       
-            department.head = user
+            if user_id != 'None':
+                user = User.objects.get(id=user_id)       
+                department.head = user
             department.save()
             return HttpResponseRedirect(reverse('department'))
 
