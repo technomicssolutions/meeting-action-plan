@@ -22,7 +22,16 @@
 					<td>{{actionplan.date_opened}}</td>
 					<td>{{actionplan.action}}</td>
 					<td>{{actionplan.focal}}</td>
-					<td>{{actionplan.priority}}</td>
+					{% if actionplan.priority == '1' %}
+						<td class="red">
+					{% elif actionplan.priority == '2' %}
+						<td class="orange">
+					{% elif actionplan.priority == '3' %}
+						<td class="green">
+					{% else %}
+						<td> 
+					{% endif %}
+						{{actionplan.priority}}</td>
 					<td>{{actionplan.status}}</td>
 					<td>{{actionplan.date_closed}}</td>
 					<td>{{actionplan.comments}}</td>

@@ -59,6 +59,8 @@
 	font-size: 15px;
 	list-style: none;
 	color: #008000;
+	border-right: 1px solid #ffffff;
+	padding: 2px 10px 2px 5px;
 	
 }
 .menu a{
@@ -226,10 +228,9 @@ body {
 .action td
 {
 	padding:38px;
-	border:1px ;
-	border-collapse:collapse;
+	
 	width: 100%;
-	margin: auto;
+	
 }
 .action th
 {
@@ -398,4 +399,17 @@ body {
 }
 .action p{
 	color: red;
+}
+
+.red {
+	background-color: #ff0000 !important;
+	width: 20% !important;
+}
+.green {
+	background-color: #7fff00 !important;
+	width: 20% !important;
+}
+.orange {
+	background-color: #ff8c00 !important;
+	width: 20% !important;
 }

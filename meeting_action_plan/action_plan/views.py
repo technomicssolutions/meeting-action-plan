@@ -166,10 +166,11 @@ class EditDepartment(View):
     def get(self,request,*args,**kwargs):
         department_id = kwargs['department_id']
         department = Department.objects.get(id=department_id)
+        users = User.objects.all()
         if request.method == 'GET':
-            form = DepartmentForm(instance=department)
             context = {
-                'form':form,
+                'users':users,
+                'department':department,
                 'department_id':department_id,
             }
             return render(request,'edit_department.html',context)
@@ -177,9 +178,13 @@ class EditDepartment(View):
     def post(self,request,*args,**kwargs):
         department_id = kwargs['department_id']
         department = Department.objects.get(id=department_id)
+        user_id=request.POST['user_id']
         if request.method == 'POST':   
-            form = DepartmentForm(request.POST,instance=department)
-            form.save()
+            department.name = request.POST['name']
+            
+            user = User.objects.get(id=user_id)       
+            department.head = user
+            department.save()
             return HttpResponseRedirect(reverse('department'))
 
 class EditUser(View):
