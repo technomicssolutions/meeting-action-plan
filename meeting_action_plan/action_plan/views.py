@@ -10,6 +10,7 @@ from django.views import generic
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from action_plan.forms import DepartmentForm,ActionPlanForm
+from django.db import IntegrityError
 
 class Home(View):
     def get(self,request):
@@ -65,17 +66,28 @@ class ActionPlanView(generic.ListView):
 class AddDepartmentView(View):
     def get(self, request, *args, **kwargs):
         users = User.objects.all()
-        # print users, 'iuiiuiu'
         return render(request, 'add_department.html', {'users': users})
     def post(self, request, *args, **kwargs):
-        department = Department() 
-        department.name = request.POST['name']
-        user_id=request.POST['user_id']
-        if user_id != 'None': 
-            user = User.objects.get(id=user_id)       
-            department.head = user
-        department.save()
-        return HttpResponseRedirect(reverse('department'))
+        users = User.objects.all()
+        try:
+            department = Department.objects.get(name=request.POST['name'])
+            
+            context = {'users': users, 'message': 'Department already exists'}
+            context.update(request.POST)
+            return render(request, 'add_department.html', context)
+        except:
+            
+            user_id=request.POST['user_id']
+            if request.POST['name'] !='' and request.POST['name'] !=None and len(request.POST['name']) > 0:
+                department = Department() 
+                department.name = request.POST['name']
+                if user_id != 'None': 
+                    user = User.objects.get(id=user_id)       
+                    department.head = user
+                department.save()
+            else:
+                return render(request, 'add_department.html', {'message':'Department is null','users': users, })
+        return HttpResponseRedirect(reverse('departments'))
 
 class AddUserView(View):
     def get(self, request, *args, **kwargs):
@@ -89,13 +101,16 @@ class AddUserView(View):
             return render(request, 'add_user.html',context)
         except:
             user = User()
-            user.username = request.POST['username']
-            user.first_name = User(request.POST['firstname'])
-            user.last_name = User(request.POST['lastname'])
-            user.save()
-            user.set_password(request.POST['password'])
-            user.save()    
-            return HttpResponseRedirect(reverse('users'))
+            if request.POST['username'] !='':
+                user.username = request.POST['username']
+                user.first_name = User(request.POST['firstname'])
+                user.last_name = User(request.POST['lastname'])
+                user.save()
+                user.set_password(request.POST['password'])
+                user.save()    
+                return HttpResponseRedirect(reverse('users'))
+            else:
+                return render(request, 'add_user.html',{'message':'Username is blank'})
 
 class AddActionPlanView(View):
     def get(self,request,*args,**kwargs):
@@ -144,7 +159,7 @@ class DeleteDepartment(View):
         department_id = kwargs['department_id']
         department = Department.objects.get(id=department_id)
         department.delete()
-        return HttpResponseRedirect(reverse('department'))
+        return HttpResponseRedirect(reverse('departments'))
 
 class DeleteUser(View):
     def get(self,request,*args,**kwargs):
@@ -176,17 +191,33 @@ class EditDepartment(View):
             return render(request,'edit_department.html',context)
 
     def post(self,request,*args,**kwargs):
+
         department_id = kwargs['department_id']
         department = Department.objects.get(id=department_id)
         user_id=request.POST['user_id']
-        print user_id
-        if request.method == 'POST':   
-            department.name = request.POST['name']
-            if user_id != 'None':
-                user = User.objects.get(id=user_id)       
-                department.head = user
-            department.save()
-            return HttpResponseRedirect(reverse('department'))
+        users_data = User.objects.all()
+        if request.method == 'POST': 
+            try:  
+                department.name = request.POST['name']
+                department.save()
+                
+                if user_id != 'None':
+                    head = User.objects.get(id=user_id)       
+                    department.head = head
+                department.save()
+            except Exception as ex:
+                return HttpResponseRedirect(reverse('departments'))
+                # print "hgasfdj" , str(ex)
+                
+                # context = {
+                #     'users':users_data,
+                #     'user_id':user_id,
+                #     'department':department,
+                #     'department_id':department_id,
+                #     'message':'all ready exists'
+                # }
+                # return render(request,'edit_department.html',context)
+        return HttpResponseRedirect(reverse('departments'))
 
 class EditUser(View):
 
@@ -203,15 +234,16 @@ class EditUser(View):
         try:
             user_id = kwargs['user_id']
             user = User.objects.get(id=user_id)
-            
-            return render(request, 'edit_user.html',{})
-        except:
             user.username = request.POST['username']
             user.first_name = User(request.POST['firstname'])
             user.last_name = User(request.POST['lastname'])
             user.save()
-               
             return HttpResponseRedirect(reverse('users'))
+            
+        except:
+                
+            return render(request ,'edit_user.html',{'users' : user,'user_id':user_id,'message':'username already exists'})
+            
 
 class EditActionPlan(View):
 

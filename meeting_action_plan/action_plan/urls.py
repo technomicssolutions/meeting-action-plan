@@ -4,7 +4,7 @@ from action_plan.views import*
 urlpatterns = patterns('',
 	url(r'login/$',  Login.as_view(), name='login'),
     url(r'logout/$', Logout.as_view(), name='logout'),
-    url(r'^$', Home.as_view(), name='home'),
+    url(r'^$', login_required(Home.as_view()), name='home'),
     url(r'add_department/$',  login_required(AddDepartmentView.as_view()), name='add_department'),
     url(r'departments/$',login_required(DepartmentView.as_view()),name='departments'),
     url(r'users/$',login_required (UserView.as_view()),name='users'),

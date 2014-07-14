@@ -241,6 +241,14 @@ body {
 	color: red;
 	list-style: none;
 }
+.red_text {
+	color: #ff0000;
+}
+.errorlist {
+	color: red;
+	list-style: none;
+	float: left;
+}
 .edit_user{
 	width: 30%;
 	margin: auto;

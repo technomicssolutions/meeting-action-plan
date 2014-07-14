@@ -8,10 +8,11 @@
                     <label for="username">Username:</label>
                     <input type="text"  name="username" id="username"  />
                 </div>
+                <div class="red_text">
                 {% if message %}
                     {{message}}
                 {% endif %}
-                
+                </div>
                 <div class="user_fields">
                     <label for="password">Password :</label>
                     <input id="password" name="password" required="required" type="password"/>

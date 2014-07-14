@@ -5,7 +5,7 @@
 <div class="add_department">
     <form method="post" action="{% url 'add_department' %}">{% csrf_token %}
     	<label for="name">Department Name:</label>
-        <input id="name" type="text" name="name" />
+        <input id="name" type="text" name="name" value="{{name.0}}"/>
         <label>Department Head:</label>
         <select name="user_id">
         	<option value="None">None</option>
@@ -15,6 +15,7 @@
         		{% endif %}
         	{% endfor %}
         </select>
+        <div class="red_text">{{message}}</div>
     	<div class="add_department_button">
             <input type='submit' value='Submit'/>
         </div>
