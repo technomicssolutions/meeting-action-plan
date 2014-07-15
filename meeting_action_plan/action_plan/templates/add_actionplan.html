@@ -18,9 +18,13 @@
 				{% endfor %}
 			</select>
 		{% else %}
-			<input type="text" name="department_name" value="{{user.department_set.all.0.name}}" readonly>
-	
+		<select name="department_name">
+			{% for department in user.department_set.all%}
+				<option  value="{{department.name}}">{{department.name}}</option>
+			{% endfor %}
+		</select>	
 		{% endif %}
+			
 		<input type='submit' value='Submit'/>
 	</form>
 </div>

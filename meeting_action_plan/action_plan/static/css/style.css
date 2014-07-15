@@ -1,29 +1,10 @@
-.user table{
-	width:100%;
-	margin: auto;
-}
-.user td
-{
-	padding:15px;
-	border:1px ;
-	border-collapse:collapse;
-	
-	margin: auto;
-}
-.user th
-{
-	padding-top:0px;
-	padding-bottom:0px;
-	
-	height: 60px;
-}
+
 .logo {
 	font-size:19px;
-	padding:8px 0 8px 0;
     font-weight: bold;
     color: #FFFFFF;
     float: left;
-    margin-top: 63px;
+    margin-top: 47px;
     text-align: center;
     display: inline-block;
 
@@ -210,31 +191,12 @@ body {
 	padding-bottom: 15px;
 }
 .action {
-	width:93%;
+	width:100%;
 	height: auto;
 	margin: auto;
 	text-align: center;
 	background-color: #f3f3f3;
 	padding-bottom: 16px;
-}
-.action table{
-	width:100%;
-	height: auto;
-	margin: auto;
-}
-.action td
-{
-	padding:38px;
-	
-	width: 100%;
-	
-}
-.action th
-{
-	width: 100%;
-	height: 70;
-	margin: auto;
-	padding-left: 16px;
 }
 
 .errorlist li{
@@ -282,24 +244,7 @@ body {
 	background-color: #f3f3f3;
 	padding-bottom: 15px;
 }
-.department table{
-	width:100%;
-	margin: auto;
-}
-.department td
-{	padding:15px;
-	border:1px ;
-	border-collapse:collapse;
-	
-	margin: auto;
-}
-.department th
-{
-	padding-top:0px;
-	padding-bottom:0px;
-	
-	height: 60px;
-}
+
 .add_department{
 	height: 30%;
 }
@@ -311,6 +256,8 @@ body {
 .add_department_button input[type="submit"]{
 	float: left;
 	height: auto;
+	width:23%;
+	margin-left: 154px;
 }
 .edit_department{
 
@@ -418,15 +365,12 @@ body {
 
 .red {
 	background-color: #ff0000 !important;
-	width: 20% !important;
 }
 .green {
 	background-color: #7fff00 !important;
-	width: 20% !important;
 }
 .orange {
 	background-color: #ff8c00 !important;
-	width: 20% !important;
 }
 #id_focal {
 	height: auto;

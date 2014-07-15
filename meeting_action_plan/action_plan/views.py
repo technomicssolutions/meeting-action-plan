@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from action_plan.forms import DepartmentForm,ActionPlanForm
 from django.db import IntegrityError
+from django.db import transaction, DatabaseError
 
 class Home(View):
     def get(self,request):
@@ -53,7 +54,7 @@ class UserView(generic.ListView):
     template_name = 'users.html'
     context_object_name = 'latest_user_list'
     def get_queryset(self):
-        users = User.objects.order_by('username')
+        users = User.objects.order_by('username').exclude(is_superuser=True)
         return users
 
 class ActionPlanView(generic.ListView):
@@ -72,7 +73,7 @@ class AddDepartmentView(View):
         try:
             department = Department.objects.get(name=request.POST['name'])
             
-            context = {'users': users, 'message': 'Department already exists'}
+            context = {'users': users, 'message': 'Department name already exists'}
             context.update(request.POST)
             return render(request, 'add_department.html', context)
         except:
@@ -86,7 +87,7 @@ class AddDepartmentView(View):
                     department.head = user
                 department.save()
             else:
-                return render(request, 'add_department.html', {'message':'Department is null','users': users, })
+                return render(request, 'add_department.html', {'message':'Department name is null','users': users, })
         return HttpResponseRedirect(reverse('departments'))
 
 class AddUserView(View):
@@ -131,7 +132,7 @@ class AddActionPlanView(View):
             form = ActionPlanForm(request.POST)
             departments = Department.objects.all()
             plan = ActionPlan.objects.all()
-            print form
+            
             if form.is_valid():
                 form.save()
                 if request.user.is_superuser:
@@ -195,29 +196,28 @@ class EditDepartment(View):
         department_id = kwargs['department_id']
         department = Department.objects.get(id=department_id)
         user_id=request.POST['user_id']
-        users_data = User.objects.all()
+        users = User.objects.all()
         if request.method == 'POST': 
             try:  
                 department.name = request.POST['name']
                 department.save()
-                
-                if user_id != 'None':
-                    head = User.objects.get(id=user_id)       
-                    department.head = head
-                department.save()
-            except Exception as ex:
-                return HttpResponseRedirect(reverse('departments'))
-                # print "hgasfdj" , str(ex)
-                
-                # context = {
-                #     'users':users_data,
-                #     'user_id':user_id,
-                #     'department':department,
-                #     'department_id':department_id,
-                #     'message':'all ready exists'
-                # }
-                # return render(request,'edit_department.html',context)
-        return HttpResponseRedirect(reverse('departments'))
+                if request.POST['name'] !='':
+                    if user_id != 'None':
+                        head = User.objects.get(id=user_id)       
+                        department.head = head
+                    department.save()
+                    return HttpResponseRedirect(reverse('departments'))
+                else :
+                    return render(request, 'edit_department.html',{'department_id':department_id,'department':department,'users':users,'message':'Department name is blank'})
+            except DatabaseError:
+                try:
+                    transaction.rollback()
+                except transaction.TransactionManagementError:
+                    users = User.objects.all()
+            context = {'users' : users,'department_id':department_id, 'department':department, 'message':'Department name ' + request.POST['name']+ ' already exists'}
+            return render(request ,'edit_department.html',context)
+
+        
 
 class EditUser(View):
 
@@ -231,18 +231,25 @@ class EditUser(View):
             }
             return render(request,'edit_user.html',context)
     def post(self, request, *args, **kwargs):
+        user_id = kwargs['user_id']
+        user = User.objects.get(id=user_id)
         try:
-            user_id = kwargs['user_id']
-            user = User.objects.get(id=user_id)
-            user.username = request.POST['username']
-            user.first_name = User(request.POST['firstname'])
-            user.last_name = User(request.POST['lastname'])
-            user.save()
-            return HttpResponseRedirect(reverse('users'))
-            
-        except:
-                
-            return render(request ,'edit_user.html',{'users' : user,'user_id':user_id,'message':'username already exists'})
+            if request.POST['username'] !='':
+                user.username = request.POST['username']
+                user.first_name = User(request.POST['firstname'])
+                user.last_name = User(request.POST['lastname'])
+                user.save()
+                return HttpResponseRedirect(reverse('users'))
+            else:
+                return render(request, 'edit_user.html',{'users':user,'user_id':user_id ,'message':'Username is blank'})
+        except DatabaseError:
+            try:
+                transaction.rollback()
+            except transaction.TransactionManagementError:
+                user = User.objects.get(id=user_id)
+                user.save()
+        context = {'users' : user,'user_id':user_id, 'message':'username already exists'}
+        return render(request ,'edit_user.html',context)
             
 
 class EditActionPlan(View):
@@ -261,10 +268,11 @@ class EditActionPlan(View):
     def post(self,request,*args,**kwargs):
         actionplan_id = kwargs['actionplan_id']
         actionplan = ActionPlan.objects.get(id=actionplan_id)
-        if request.method == 'POST':   
-            form = ActionPlanForm(request.POST,instance=actionplan)
-            form.save()
-            return HttpResponseRedirect(reverse('actionplans'))
-
+        if request.method == 'POST':
+                form = ActionPlanForm(request.POST,instance=actionplan)
+                if form.is_valid():
+                    form.save()
+                    return HttpResponseRedirect(reverse('actionplans'))
+        return render(request,'edit_action_plan.html',{'form':form, 'actionplan_id':actionplan_id, })
 
     

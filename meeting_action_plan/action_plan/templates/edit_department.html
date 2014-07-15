@@ -3,24 +3,24 @@
 <div class="alert alert-info" align="Center"><h4>Edit Department</h4></div>
 
 <div class="edit_department">
-	<form method="post" action="{% url 'editdepartment' department_id %}">{% csrf_token %}
+	<form method="post" action="{% url 'editdepartment' department.id %}">{% csrf_token %}
 		<div class="edit_department">
 			<label for="name">Department Name:</label>
 			<input type="text" name="name" value="{{department.name}}" />
 			<label>Department Head:</label>
-			<select name="user_id">
-	        	<option value="None">None</option>
-	        	{% for usr in users %}
-	        		{% if not usr.is_superuser %}
-	        			<option value="{{usr.id}}">{{usr.first_name}}</option>
+			<select name="user_id" >
+				<option value="None">None</option>
+	        	{% for user in users %}
+	        		{% if not user.is_superuser %}
+	        			<option value="{{user.id}}" {% if department.head == user %}selected='true' {% endif %}>{{user.first_name}}</option>
 	        		{% endif %}
 	        	{% endfor %}
         	</select>
 
 			<div class="edit_dep_button">
 				<input type='submit' value='Submit'/>
+				<p class="red_text">{{message}}</p>
 			</div>
-			<div class="red_text">{{message}}</div>
 		</div>
 	</form>
 </div>
