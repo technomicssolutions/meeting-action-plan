@@ -36,7 +36,7 @@ class Login(View):
         context = {
          'Success_message': 'Welcome '+request.POST['username']
         }
-        return render(request, 'home.html', context)
+        return HttpResponseRedirect(reverse('actionplans'))
 
 class Logout(View):
     def get(self,request,*args,**kwargs):
@@ -57,12 +57,15 @@ class UserView(generic.ListView):
         users = User.objects.order_by('username').exclude(is_superuser=True)
         return users
 
-class ActionPlanView(generic.ListView):
-    template_name = 'actionplan.html'
-    context_object_name = 'latest_actionplan_list'
-    def get_queryset(self):
-        actionplans = ActionPlan.objects.order_by('date_opened')
-        return actionplans
+class ActionPlanView(View):
+    def get(self, request, *args, **kwargs):
+        actionplans_opened= ActionPlan.objects.filter(status='Open').order_by('date_opened')
+        actionplans_closed= ActionPlan.objects.filter(status='Closed').order_by('date_closed')
+        context = { 
+            'actionplans_opened':actionplans_opened,
+            'actionplans_closed':actionplans_closed,
+        }
+        return render(request,'actionplan.html',context)
 
 class AddDepartmentView(View):
     def get(self, request, *args, **kwargs):
@@ -147,6 +150,12 @@ class AddActionPlanView(View):
                     plan = ActionPlan.objects.latest('id')
                     plan.department =department
                     plan.save()
+                if plan.status == 'Open':
+                    plan.date_opened = datetime.now()
+                else:
+                    plan.date_closed = datetime.now()
+                plan.save()
+
                 return HttpResponseRedirect(reverse('actionplans'))
             
             context ={
@@ -262,6 +271,7 @@ class EditActionPlan(View):
             context = {
                 'form':form,
                 'actionplan_id':actionplan_id,
+                'actionplan':actionplan,
             }
             return render(request,'edit_action_plan.html',context)
 
@@ -269,10 +279,14 @@ class EditActionPlan(View):
         actionplan_id = kwargs['actionplan_id']
         actionplan = ActionPlan.objects.get(id=actionplan_id)
         if request.method == 'POST':
-                form = ActionPlanForm(request.POST,instance=actionplan)
-                if form.is_valid():
-                    form.save()
-                    return HttpResponseRedirect(reverse('actionplans'))
+            form = ActionPlanForm(request.POST,instance=actionplan)
+            if form.is_valid():
+                form.save()
+                if request.POST['status'] == 'Closed':
+                    actionplan.date_closed = datetime.now()
+                actionplan.save();
+                return HttpResponseRedirect(reverse('actionplans'))
+           
         return render(request,'edit_action_plan.html',{'form':form, 'actionplan_id':actionplan_id, })
 
     

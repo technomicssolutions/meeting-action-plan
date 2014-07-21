@@ -1,8 +1,13 @@
 
 <div class="header">
+	<div class="logo_img">
+		<img src="/static/images/logo.jpg"  id="logo_image">
+	<div class="logo">Meeting Action Plan</div>
 	{% if user.is_authenticated %}
-		<div class="logo">Meeting Action Plan</div>
+		
+
 		<div class="menu">
+
 			<li>{{user.username}}<img src="/static/images/user.png" width="24px" ></li>
 			{% if user.is_superuser %}		
 				<li><a href="{% url 'departments' %}">Departments </a></li>
@@ -12,4 +17,5 @@
 			<li><a href="{% url 'logout' %}">Logout </a></li>
 		</div>
 	{% endif %}
+	</div>
 </div>

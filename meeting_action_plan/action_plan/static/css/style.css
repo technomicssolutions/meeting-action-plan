@@ -4,10 +4,22 @@
     font-weight: bold;
     color: #FFFFFF;
     float: left;
-    margin-top: 47px;
+    
     text-align: center;
     display: inline-block;
+    width: 30%;
+    margin-top: 23px;
+}
 
+.logo_img {
+	vertical-align: middle;
+	width: 100%;
+	margin: auto;
+	margin-top: 17px;
+
+}
+#logo_image {
+	width:8%;
 }
 .header {
 	background-color: #ADD8E6;
@@ -30,7 +42,7 @@
 }
 .menu{
 	float:right;
-	margin-top: 40px;
+	margin-top: 21px;
 	margin-right: 10px;
 
 }
@@ -301,17 +313,20 @@ body {
 .add_plan {
 	width: 36%;
 	margin: auto;
-	height: 90%;
+	height: 100%;
 	background-color: #f3f3f3;
 
 }
 .add_plan label {
 	float: left;
 	margin-right: 14px;
+	
+	/*margin-top: 23px;*/
 }
 .add_plan textarea {
 	float: left;
-	height: 10%;
+	height: 25%;
+	width: 93%;
 }
 
 .add_plan input {
@@ -320,10 +335,12 @@ body {
 }
 .add_plan select {
 	float: left;
+	margin-right: 132px;
 }
 .add_plan form {
 	padding: 14px;
-    width: 38%;
+    width: 100%;
+
 }
 
 .edit_plan {
@@ -339,7 +356,8 @@ body {
 }
 .edit_plan textarea {
 	float: left;
-	height: 10%;
+	height: 25%;
+	width: 93%;
 }
 
 .edit_plan input {
@@ -347,10 +365,11 @@ body {
 }
 .edit_plan select {
 	float: left;
+	margin-right: 132px;
 }
 .edit_plan form {
 	padding: 14px;
-    width: 38%;
+    width: 100%;
 }
 
 .department p{
@@ -374,4 +393,5 @@ body {
 }
 #id_focal {
 	height: auto;
+	margin-right: 163px;
 }

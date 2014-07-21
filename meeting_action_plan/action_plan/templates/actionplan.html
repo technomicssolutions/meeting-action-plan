@@ -2,13 +2,13 @@
 {% block content %}
 <div class="alert alert-info" align="Center"><h4>Action Plans</h4></div>
 <div class="actidafon">
-	{% if latest_actionplan_list %}
+	{% if actionplans_opened or actionplans_closed %}
 		<table class="table table-striped">
 			<tr>
 				<th>Date Opened</th>
 				<th>Requirement/Action</th>
 				<th>Focal</th>
-				<th>Proirity</th>
+				<th>Priority</th>
 				<th>Status</th>
 				<th>Date Closed</th>
 				<th>Comments/Update</th>
@@ -17,7 +17,32 @@
 				<th></th>
 				
 			</tr>
-			{% for actionplan in latest_actionplan_list %}
+			{% for actionplan in actionplans_opened %}
+				<tr>
+					<td>{{actionplan.date_opened}}</td>
+					<td>{{actionplan.action}}</td>
+					<td>{{actionplan.focal}}</td>
+					{% if actionplan.priority == '1' %}
+						<td class="red">
+					{% elif actionplan.priority == '2' %}
+						<td class="orange">
+					{% elif actionplan.priority == '3' %}
+						<td class="green">
+					{% else %}
+						<td> 
+					{% endif %}
+						{{actionplan.priority}}</td>
+					<td>{{actionplan.status}}</td>
+					<td>{{actionplan.date_closed}}</td>
+					<td>{{actionplan.comments}}</td>
+					<td>{{actionplan.department.name}}</td>
+					{% if user.is_superuser or user == actionplan.department.head %}
+						<td><a href="{% url 'editactionplan' actionplan.id %}">Edit</a></td>
+						<td><a href="{% url 'delete_action_plan' actionplan.id %}">Delete</a></td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+			{% for actionplan in actionplans_closed %}
 				<tr>
 					<td>{{actionplan.date_opened}}</td>
 					<td>{{actionplan.action}}</td>
