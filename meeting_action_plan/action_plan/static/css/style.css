@@ -336,6 +336,8 @@ body {
 .add_plan select {
 	float: left;
 	margin-right: 132px;
+	margin-left: 5px;
+
 }
 .add_plan form {
 	padding: 14px;
@@ -394,4 +396,8 @@ body {
 #id_focal {
 	height: auto;
 	margin-right: 163px;
+	margin-left: 10px;
+}
+#id_priority{
+	margin-left: 2px;
 }
