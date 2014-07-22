@@ -59,8 +59,8 @@ class UserView(generic.ListView):
 
 class ActionPlanView(View):
     def get(self, request, *args, **kwargs):
-        actionplans_opened= ActionPlan.objects.filter(status='Open').order_by('date_opened')
-        actionplans_closed= ActionPlan.objects.filter(status='Closed').order_by('date_closed')
+        actionplans_opened= ActionPlan.objects.filter(status='Open').order_by('-date_opened')
+        actionplans_closed= ActionPlan.objects.filter(status='Closed').order_by('-date_closed')
         context = { 
             'actionplans_opened':actionplans_opened,
             'actionplans_closed':actionplans_closed,
