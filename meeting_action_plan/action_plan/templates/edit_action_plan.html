@@ -1,4 +1,19 @@
 {% extends 'base.html' %}
+{% block extraheader %}
+	<script> 
+		$( document ).ready(function() {
+			new Picker.Date($$('#id_target_date'), {
+	            timePicker: false,
+	            positionOffset: {x: 5, y: 0},
+	            pickerClass: 'datepicker_bootstrap',
+	            useFadeInOut: !Browser.ie,
+	            format:'%Y-%m-%d',
+	        });
+		});
+		
+	</script>
+	
+{% endblock extraheader %}
 {% block content %}
 	<body>
 		<div class="alert alert-info" align="Center"><h4>Edit Action Plan</h4></div>

@@ -19,4 +19,4 @@ class ActionPlanForm(ModelForm):
 
 		model = ActionPlan
 		exclude = ['department']
-		fields = ['action', 'focal', 'priority', 'status', 'comments']
+		fields = ['action', 'focal', 'target_date','status', 'comments']

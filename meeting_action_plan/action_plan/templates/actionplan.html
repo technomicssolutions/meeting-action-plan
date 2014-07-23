@@ -8,7 +8,7 @@
 				<th>Date Opened</th>
 				<th>Requirement/Action</th>
 				<th>Focal</th>
-				<th>Priority</th>
+				<th>Target Date</th>
 				<th>Status</th>
 				<th>Date Closed</th>
 				<th>Comments/Update</th>
@@ -22,17 +22,16 @@
 					<td>{{actionplan.date_opened}}</td>
 					<td>{{actionplan.action}}</td>
 					<td>{{actionplan.focal}}</td>
-					{% if actionplan.priority == '1' %}
+					<td>{{actionplan.target_date|date:'d/m/Y'}}</td>
+					{% if actionplan.status == 'Open' %}
 						<td class="red">
-					{% elif actionplan.priority == '2' %}
-						<td class="orange">
-					{% elif actionplan.priority == '3' %}
+					{% elif actionplan.status == 'Closed' %}
 						<td class="green">
 					{% else %}
 						<td> 
 					{% endif %}
-						{{actionplan.priority}}</td>
-					<td>{{actionplan.status}}</td>
+						{{actionplan.status}}</td>
+					
 					<td>{{actionplan.date_closed}}</td>
 					<td>{{actionplan.comments}}</td>
 					<td>{{actionplan.department.name}}</td>
@@ -47,17 +46,17 @@
 					<td>{{actionplan.date_opened}}</td>
 					<td>{{actionplan.action}}</td>
 					<td>{{actionplan.focal}}</td>
-					{% if actionplan.priority == '1' %}
+					<td>{{actionplan.target_date|date:'d/m/Y'}}</td>
+					{% if actionplan.status == 'Open' %}
 						<td class="red">
-					{% elif actionplan.priority == '2' %}
-						<td class="orange">
-					{% elif actionplan.priority == '3' %}
+					{% elif actionplan.status == 'Closed' %}
 						<td class="green">
+					
 					{% else %}
 						<td> 
 					{% endif %}
-						{{actionplan.priority}}</td>
-					<td>{{actionplan.status}}</td>
+						{{actionplan.status}}</td>
+					<!-- <td>{{actionplan.status}}</td> -->
 					<td>{{actionplan.date_closed}}</td>
 					<td>{{actionplan.comments}}</td>
 					<td>{{actionplan.department.name}}</td>

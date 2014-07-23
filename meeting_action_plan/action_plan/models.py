@@ -28,6 +28,7 @@ class ActionPlan(models.Model):
     priority = models.CharField( max_length=1, choices=PRIORITY_CHOICES)
     status = models.CharField( max_length=10, choices=STATUS_CHOICES)
     date_closed = models.DateTimeField('Date Closed', null=True, blank=True)
+    target_date = models.DateTimeField('Target Date', null=True, blank=True)
     comments = models.TextField('Comments/Update', null=True, blank=True)
     department = models.ForeignKey(Department, null=True, blank=True)
 

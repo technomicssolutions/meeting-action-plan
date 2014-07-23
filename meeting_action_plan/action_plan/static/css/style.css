@@ -21,7 +21,7 @@
 #logo_image {
 	width:8%;
 }
-.header {
+.header_nav {
 	background-color: #ADD8E6;
 	width: 100% !important;
 	min-height: 100px !important;
@@ -396,11 +396,16 @@ body {
 #id_focal {
 	height: auto;
 	margin-right: 163px;
-	margin-left: 10px;
+	margin-left: 41px;
 }
-#id_priority{
+/*#id_priority{
 	margin-left: 2px;
-}
+}*/
 #id_status{
-	margin-left: 6px;
+	margin-left: 37px;
+}
+#id_target_date {
+	height: auto;
+	margin-right: 132px;
+	margin-left: 1px;
 }
