@@ -82,7 +82,7 @@
 			</div>
 			{% for actionplan in actionplans_opened %}
 				<div class="table_row">
-					<div class="th1">{{actionplan.date_opened}}</div>
+					<div class="th1">{{actionplan.date_opened|date:'d/m/Y'}}</div>
 					<div class="th2">{{actionplan.action}}</div>
 					<div class="th3">{{actionplan.focal}}</div>
 					
@@ -94,8 +94,8 @@
 						<div class="th4"> 
 					{% endif %}
 						{{actionplan.status}}</div>
-					<div class="th5">{{actionplan.target_date}}</div>
-					<div class="th6">{{actionplan.date_closed}}</div>
+					<div class="th5">{{actionplan.target_date|date:'d/m/Y'}}</div>
+					<div class="th6">{{actionplan.date_closed|date:'d/m/Y'}}</div>
 					<div class="th7">{{actionplan.comments}}</div>
 					<div class="th8">{{actionplan.department.name}}</div>
 					{% if user.is_superuser or user == actionplan.department.head %}
@@ -106,7 +106,7 @@
 			{% endfor %}
 			{% for actionplan in actionplans_closed %}
 				<div class="table_row">
-					<div class="th1">{{actionplan.date_opened}}</div>
+					<div class="th1">{{actionplan.date_opened|date:'d/m/Y'}}</div>
 					<div class="th2">{{actionplan.action}}</div>
 					<div class="th3">{{actionplan.focal}}</div>
 					
@@ -119,8 +119,8 @@
 						<div class="th4"> 
 					{% endif %}
 						{{actionplan.status}}</div>
-					<div class="th5">{{actionplan.target_date}}</div>
-					<div class="th6">{{actionplan.date_closed}}</div>
+					<div class="th5">{{actionplan.target_date|date:'d/m/Y'}}</div>
+					<div class="th6">{{actionplan.date_closed|date:'d/m/Y'}}</div>
 					<div class="th7">{{actionplan.comments}}</div>
 					<div class="th8">{{actionplan.department.name}}</div>
 					{% if user.is_superuser or user == actionplan.department.head %}

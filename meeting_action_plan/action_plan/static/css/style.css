@@ -386,13 +386,14 @@ body {
 	float: left;
 	height: 100%;
 	border-bottom: 1px solid #F2F2F2;
+	
 }
 .th1, .th4, .th5, .th6, .th9, .th10{
 	width:5% !important;
 	float: left;
 	height: 100%;
 	border-bottom: 1px solid #F2F2F2;
-
+	
 }
 
 .table_container {
@@ -411,4 +412,10 @@ body {
 }
 .table_header {
 	font-weight: bold;
+}
+.th7 {
+	width: 16% !important;
+}
+.th1, .th5, .th6 {
+	width: 6% !important;
 }
