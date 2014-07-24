@@ -1,4 +1,5 @@
 from action_plan.models import*
+import datetime as dt
 from datetime import datetime
 from django.utils import timezone
 from django.core.urlresolvers import reverse
@@ -138,6 +139,9 @@ class AddActionPlanView(View):
             
             if form.is_valid():
                 form.save()
+                target_date = form.cleaned_data['target_date']
+                current_time = datetime.now().time()
+                target_date = target_date.replace(hour=current_time.hour, minute=current_time.minute)
                 if request.user.is_superuser:
                     department_id = request.POST['department_id']
                     department = Department.objects.get(id=department_id)
@@ -154,6 +158,7 @@ class AddActionPlanView(View):
                     plan.date_opened = datetime.now()
                 else:
                     plan.date_closed = datetime.now()
+                plan.target_date = target_date
                 plan.save()
 
                 return HttpResponseRedirect(reverse('actionplans'))
@@ -282,8 +287,12 @@ class EditActionPlan(View):
             form = ActionPlanForm(request.POST,instance=actionplan)
             if form.is_valid():
                 form.save()
+                target_date = form.cleaned_data['target_date']
+                current_time = datetime.now().time()
+                target_date = target_date.replace(hour=current_time.hour, minute=current_time.minute)
                 if request.POST['status'] == 'Closed':
                     actionplan.date_closed = datetime.now()
+                actionplan.target_date = target_date
                 actionplan.save();
                 return HttpResponseRedirect(reverse('actionplans'))
            

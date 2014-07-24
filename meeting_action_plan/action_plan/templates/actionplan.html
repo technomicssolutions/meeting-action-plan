@@ -8,11 +8,11 @@
 				<th>Date Opened</th>
 				<th>Requirement/Action</th>
 				<th>Focal</th>
-				<th>Target Date</th>
 				<th>Status</th>
+				<th>Target Date</th>
 				<th>Date Closed</th>
 				<th>Comments/Update</th>
-				<th>Owners</th>
+				<th>Owner</th>
 				<th></th>
 				<th></th>
 				
@@ -22,7 +22,7 @@
 					<td>{{actionplan.date_opened}}</td>
 					<td>{{actionplan.action}}</td>
 					<td>{{actionplan.focal}}</td>
-					<td>{{actionplan.target_date|date:'d/m/Y'}}</td>
+					
 					{% if actionplan.status == 'Open' %}
 						<td class="red">
 					{% elif actionplan.status == 'Closed' %}
@@ -31,7 +31,7 @@
 						<td> 
 					{% endif %}
 						{{actionplan.status}}</td>
-					
+					<td>{{actionplan.target_date}}</td>
 					<td>{{actionplan.date_closed}}</td>
 					<td>{{actionplan.comments}}</td>
 					<td>{{actionplan.department.name}}</td>
@@ -46,7 +46,7 @@
 					<td>{{actionplan.date_opened}}</td>
 					<td>{{actionplan.action}}</td>
 					<td>{{actionplan.focal}}</td>
-					<td>{{actionplan.target_date|date:'d/m/Y'}}</td>
+					
 					{% if actionplan.status == 'Open' %}
 						<td class="red">
 					{% elif actionplan.status == 'Closed' %}
@@ -56,7 +56,7 @@
 						<td> 
 					{% endif %}
 						{{actionplan.status}}</td>
-					<!-- <td>{{actionplan.status}}</td> -->
+					<td>{{actionplan.target_date}}</td>
 					<td>{{actionplan.date_closed}}</td>
 					<td>{{actionplan.comments}}</td>
 					<td>{{actionplan.department.name}}</td>
@@ -71,9 +71,11 @@
 	    <p>No Action Plans are available.</p>
 	{% endif %}
 	{% if user.is_superuser or user.department_set.all %}
-		<a href="{% url 'add_actionplan' %}">
-	        <input type='submit' value='Add a new action plan'/>
-	    </a>
+		<div class ="plan_button">
+			<a href="{% url 'add_actionplan' %}">
+		        <input type='submit' value='Add a new action plan'/>
+		    </a>
+		</div>
 	{% endif %}
 </div>
 {% endblock content %}

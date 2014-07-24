@@ -1,4 +1,8 @@
 
+body {
+	margin: 0px;
+	padding: 0px;
+}
 .logo {
 	font-size:19px;
     font-weight: bold;
@@ -7,7 +11,7 @@
     
     text-align: center;
     display: inline-block;
-    width: 30%;
+    width: 44%;
     margin-top: 23px;
 }
 
@@ -20,6 +24,7 @@
 }
 #logo_image {
 	width:8%;
+	margin: auto;
 }
 .header_nav {
 	background-color: #ADD8E6;
@@ -62,8 +67,7 @@
 .login {
 	width: 28%;
 	margin: auto;
-	display: inline-block;
-	
+
 
 	
 }
@@ -80,7 +84,8 @@
 	padding: 0px !important;
 	background-color: #f3f3f3;
 	margin-top: 60px;
-	height: auto;
+	width: 100%;
+	height: 41%;
 }
 .login_sub label{
 	
@@ -104,6 +109,7 @@
 }
 .signin_button{
 	color: #ff0000;
+
 }
 
 
@@ -112,6 +118,9 @@
 	margin: auto;
 	height: auto;
 	margin-top: 13px;
+	margin-left: 122px;
+	/*float: right;*/
+	width: 32%;
 }
 
 .add_department label{
@@ -125,19 +134,17 @@
 	margin-top: 50px;
 	padding: 10px;
 }
-body {
-	text-align: center;
-}
+
 .alert-info h4 {
   color: #3a87ae;
 }
-.content .login{
+/*.content .login{
 	
 	width: 20%;
 	margin-top: 50px;
 	margin: auto;
 }
-
+*/
 .main_content{
 	background-color: #f3f3f3;
 	padding-top: 1px;
@@ -310,66 +317,40 @@ body {
 	float: left;
 	padding-top: 14px;
 }
-.add_plan {
-	width: 36%;
+.add_plan, .edit_plan {
+	width: 60%;
 	margin: auto;
 	height: 100%;
 	background-color: #f3f3f3;
 
 }
-.add_plan label {
+.add_plan label, .edit_plan label {
 	float: left;
-	margin-right: 14px;
-	
-	/*margin-top: 23px;*/
+	width: 30%;
 }
-.add_plan textarea {
+.add_plan textarea, .edit_plan textarea {
 	float: left;
 	height: 25%;
-	width: 93%;
+	width: 60%;
 }
 
-.add_plan input {
+.add_plan input, .edit_plan input{
 	float: left;
-	height: auto;
+	height: 6% !important;
+	width: 60%;
 }
-.add_plan select {
-	float: left;
-	margin-right: 132px;
-	margin-left: 5px;
-
-}
-.add_plan form {
-	padding: 14px;
-    width: 100%;
-
+.add_plan input[type="submit"], .edit_plan input[type="submit"] {
+	display: block;
+	float: right;
+	clear: both;
+	margin-right: 10%;
 }
 
-.edit_plan {
-	width: 36%;
-	margin: auto;
-	height: auto;
-	height: 90%;
-	background-color: #f3f3f3;
-}
-.edit_plan label {
+.add_plan select, .edit_plan select {
 	float: left;
-	margin-right: 14px;
+	width: 60%;
 }
-.edit_plan textarea {
-	float: left;
-	height: 25%;
-	width: 93%;
-}
-
-.edit_plan input {
-	float: left;
-}
-.edit_plan select {
-	float: left;
-	margin-right: 132px;
-}
-.edit_plan form {
+.add_plan form, .edit_plan form {
 	padding: 14px;
     width: 100%;
 }
@@ -393,19 +374,10 @@ body {
 .orange {
 	background-color: #ff8c00 !important;
 }
-#id_focal {
-	height: auto;
-	margin-right: 163px;
-	margin-left: 41px;
-}
-/*#id_priority{
-	margin-left: 2px;
-}*/
-#id_status{
-	margin-left: 37px;
-}
-#id_target_date {
-	height: auto;
-	margin-right: 132px;
-	margin-left: 1px;
+.plan_button  {
+/* float: right;*/
+ margin: auto;
+ /*display: block;
+ clear: both;*/
+ width: 14%;
 }
