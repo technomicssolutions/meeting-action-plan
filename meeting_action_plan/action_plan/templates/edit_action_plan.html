@@ -2,12 +2,12 @@
 {% block extraheader %}
 	<script> 
 		$( document ).ready(function() {
-			new Picker.Date($$('#id_target_date'), {
+			new Picker.Date($$('#target_date'), {
 	            timePicker: false,
 	            positionOffset: {x: 5, y: 0},
 	            pickerClass: 'datepicker_bootstrap',
 	            useFadeInOut: !Browser.ie,
-	            format:'%Y-%m-%d',
+	            format:'%d/%m/%Y',
 	        });
 		});
 		
@@ -25,6 +25,8 @@
 					{{field}}
 					{{field.errors}}
 			{% endfor %}
+			<label> Target Date</label>
+			<input id="target_date" type="text" name="target_date" value="{{target_date}}">
 			<input type='submit' value='Submit'/>
 		</form>
 	</div>

@@ -2,12 +2,12 @@
 {% block extraheader %}
 	<script> 
 		$( document ).ready(function() {
-			new Picker.Date($$('#id_target_date'), {
+			new Picker.Date($$('#target_date'), {
 	            timePicker: false,
 	            positionOffset: {x: 5, y: 0},
 	            pickerClass: 'datepicker_bootstrap',
 	            useFadeInOut: !Browser.ie,
-	            format:'%Y-%m-%d',
+	            format:'%d/%m/%Y',
 	        });
 		});
 		
@@ -21,10 +21,13 @@
 <div class="add_plan">
 	<form method="post" action="{% url 'add_actionplan' %}">{% csrf_token %}
 		{% for field in formplan.visible_fields %}
+
 			<label> {{field.label}}</label>
 				{{field}}
 				{{field.errors}}
 		{% endfor %}
+		<label> Target Date</label>
+		<input id="target_date" type="text" name="target_date">
 		<label>Department Name:</label>
 		{%if user.is_superuser%}
 		

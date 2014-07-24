@@ -139,9 +139,11 @@ class AddActionPlanView(View):
             
             if form.is_valid():
                 form.save()
-                target_date = form.cleaned_data['target_date']
+                target_date = datetime.strptime(request.POST['target_date'], '%d/%m/%Y')
+                
                 current_time = datetime.now().time()
                 target_date = target_date.replace(hour=current_time.hour, minute=current_time.minute)
+                
                 if request.user.is_superuser:
                     department_id = request.POST['department_id']
                     department = Department.objects.get(id=department_id)
@@ -276,7 +278,7 @@ class EditActionPlan(View):
             context = {
                 'form':form,
                 'actionplan_id':actionplan_id,
-                'actionplan':actionplan,
+                'target_date': actionplan.target_date.strftime('%d/%m/%Y') if actionplan.target_date else '',
             }
             return render(request,'edit_action_plan.html',context)
 
@@ -287,7 +289,7 @@ class EditActionPlan(View):
             form = ActionPlanForm(request.POST,instance=actionplan)
             if form.is_valid():
                 form.save()
-                target_date = form.cleaned_data['target_date']
+                target_date = datetime.strptime(request.POST['target_date'], '%d/%m/%Y')
                 current_time = datetime.now().time()
                 target_date = target_date.replace(hour=current_time.hour, minute=current_time.minute)
                 if request.POST['status'] == 'Closed':
@@ -296,6 +298,6 @@ class EditActionPlan(View):
                 actionplan.save();
                 return HttpResponseRedirect(reverse('actionplans'))
            
-        return render(request,'edit_action_plan.html',{'form':form, 'actionplan_id':actionplan_id, })
+        return render(request,'edit_action_plan.html',{'form':form, 'actionplan_id':actionplan_id })
 
     
