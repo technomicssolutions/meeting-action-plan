@@ -381,3 +381,34 @@ body {
  clear: both;*/
  width: 14%;
 }
+.th2, .th3,  .th8, .th7{
+	width: 17% !important;
+	float: left;
+	height: 100%;
+	border-bottom: 1px solid #F2F2F2;
+}
+.th1, .th4, .th5, .th6, .th9, .th10{
+	width:5% !important;
+	float: left;
+	height: 100%;
+	border-bottom: 1px solid #F2F2F2;
+
+}
+
+.table_container {
+	width: 100%;
+}
+.table_container .table_header, .table_container .table_row{
+	width: 100%;
+}
+.table_container .table_header{
+	height: 50px;
+	border-bottom: 1px solid #F2F2F2;
+}
+.table_container .table_row{
+	height: 100px;
+	border-bottom: 1px solid #F2F2F2;
+}
+.table_header {
+	font-weight: bold;
+}
