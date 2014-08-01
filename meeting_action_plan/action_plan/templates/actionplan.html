@@ -82,50 +82,51 @@
 			</div>
 			{% for actionplan in actionplans_opened %}
 				<div class="table_row">
-					<div class="th1">{{actionplan.date_opened|date:'d/m/Y'}}</div>
-					<div class="th2">{{actionplan.action}}</div>
-					<div class="th3">{{actionplan.focal}}</div>
+					<div class="th1 td">{{actionplan.date_opened|date:'d/m/y'}}</div>
+					<div class="th2 td">{{actionplan.action}}</div>
+					<div class="th3 td">{{actionplan.focal}}</div>
 					
 					{% if actionplan.status == 'Open' %}
-						<div class="red th4">
+						<div class="red th4 td">
 					{% elif actionplan.status == 'Closed' %}
-						<div class="green th4">
+						<div class="green th4 td">
 					{% else %}
-						<div class="th4"> 
+						<div class="th4 td"> 
 					{% endif %}
 						{{actionplan.status}}</div>
-					<div class="th5">{{actionplan.target_date|date:'d/m/Y'}}</div>
-					<div class="th6">{{actionplan.date_closed|date:'d/m/Y'}}</div>
-					<div class="th7">{{actionplan.comments}}</div>
-					<div class="th8">{{actionplan.department.name}}</div>
+					<div class="th5 td">{{actionplan.target_date|date:'d/m/y'}}</div>
+					<div class="th6 td">{{actionplan.date_closed|date:'d/m/y'}}</div>
+					<div class="th7 td">{{actionplan.comments}}</div>
+					<div class="th8 td">{{actionplan.department.name}}</div>
 					{% if user.is_superuser or user == actionplan.department.head %}
-						<div class="th9"><a href="{% url 'editactionplan' actionplan.id %}">Edit</a></div>
-						<div class="th10"><a href="{% url 'delete_action_plan' actionplan.id %}">Delete</a></div>
+						<div class="th9 td"><a href="{% url 'editactionplan' actionplan.id %}">Edit</a></div>
+						<div class="th10 td"><a href="{% url 'delete_action_plan' actionplan.id %}">Delete</a></div>
 					{% endif %}
+					<div class="clear"></div>
 				</div>
 			{% endfor %}
 			{% for actionplan in actionplans_closed %}
 				<div class="table_row">
-					<div class="th1">{{actionplan.date_opened|date:'d/m/Y'}}</div>
-					<div class="th2">{{actionplan.action}}</div>
-					<div class="th3">{{actionplan.focal}}</div>
+					<div class="th1 td">{{actionplan.date_opened|date:'d/m/y'}}</div>
+					<div class="th2 td">{{actionplan.action}}</div>
+					<div class="th3 td">{{actionplan.focal}}</div>
 					
 					{% if actionplan.status == 'Open' %}
-						<div class="red th4">
+						<div class="red th4 td">
 					{% elif actionplan.status == 'Closed' %}
-						<div class="green th4">
+						<div class="green th4 td">
 					
 					{% else %}
-						<div class="th4"> 
+						<div class="th4 td"> 
 					{% endif %}
 						{{actionplan.status}}</div>
-					<div class="th5">{{actionplan.target_date|date:'d/m/Y'}}</div>
-					<div class="th6">{{actionplan.date_closed|date:'d/m/Y'}}</div>
-					<div class="th7">{{actionplan.comments}}</div>
-					<div class="th8">{{actionplan.department.name}}</div>
+					<div class="th5 td">{{actionplan.target_date|date:'d/m/y'}}</div>
+					<div class="th6 td">{{actionplan.date_closed|date:'d/m/y'}}</div>
+					<div class="th7 td">{{actionplan.comments}}</div>
+					<div class="th8 td">{{actionplan.department.name}}</div>
 					{% if user.is_superuser or user == actionplan.department.head %}
-						<div class="th9"><a href="{% url 'editactionplan' actionplan.id %}">Edit</a></div>
-						<div class="th10"><a href="{% url 'delete_action_plan' actionplan.id %}">Delete</a></div>
+						<div class="th9 td"><a href="{% url 'editactionplan' actionplan.id %}">Edit</a></div>
+						<div class="th10 td"><a href="{% url 'delete_action_plan' actionplan.id %}">Delete</a></div>
 					{% endif %}
 				</div>
 			{% endfor %}
