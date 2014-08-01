@@ -410,16 +410,26 @@ body {
 	width: 17% !important;
 	float: left;
 }
+
 .th1, .th4, .th5, .th6, .th9, .th10{
 	width:5% !important;
 	float: left;
 }
+.th3{
+	width: 12% !important;
+	float: left;
+	text-align: center;
+}
+.th2{
+	width:20% !important;
+	float: left;
+}
 .th7 {
-	width: 20% !important;
+	width: 21% !important;
 }
 .th8{
-	width: 10% !important;
-	float: left;
+	width: 9% !important;
+	text-align: center;
 }
 .th1, .th5, .th6 {
 	width: 6% !important;
