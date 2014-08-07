@@ -16,19 +16,23 @@
 {% endblock extraheader %}
 {% block content %}
 	<body>
-		<div class="alert alert-info" align="Center"><h4>Edit Action Plan</h4></div>
+		{% if message %}
+			<p class="red_text">{{ message }}</p>
+		{% else %}
+			<div class="alert alert-info" align="Center"><h4>Edit Action Plan</h4></div>
 
-		<div class="edit_plan">
-		<form method="post" action="{% url 'editactionplan' actionplan_id %}">{% csrf_token %}
-			{% for field in form.visible_fields %}
-				<label> {{field.label}}</label>
-					{{field}}
-					{{field.errors}}
-			{% endfor %}
-			<label> Target Date</label>
-			<input id="target_date" type="text" name="target_date" value="{{target_date}}">
-			<input type='submit' value='Submit'/>
-		</form>
-	</div>
+			<div class="edit_plan">
+				<form method="post" action="{% url 'editactionplan' actionplan_id %}">{% csrf_token %}
+					{% for field in form.visible_fields %}
+						<label> {{field.label}}</label>
+							{{field}}
+							{{field.errors}}
+					{% endfor %}
+					<label> Target Date</label>
+					<input id="target_date" type="text" name="target_date" value="{{target_date}}">
+					<input type='submit' value='Submit'/>
+				</form>
+			</div>
+		{% endif %}
 	</body>
 {% endblock content %}

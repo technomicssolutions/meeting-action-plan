@@ -144,18 +144,11 @@ class AddActionPlanView(View):
                 current_time = datetime.now().time()
                 target_date = target_date.replace(hour=current_time.hour, minute=current_time.minute)
                 
-                if request.user.is_superuser:
-                    department_id = request.POST['department_id']
-                    department = Department.objects.get(id=department_id)
-                    plan = ActionPlan.objects.latest('id')
-                    plan.department = department
-                    plan.save()
-                else :
-                    department_name = request.POST['department_name']
-                    department = Department.objects.get(name=department_name)
-                    plan = ActionPlan.objects.latest('id')
-                    plan.department =department
-                    plan.save()
+                department_id = request.POST['department_id']
+                department = Department.objects.get(id=department_id)
+                plan = ActionPlan.objects.latest('id')
+                plan.department = department
+                plan.save()
                 if plan.status == 'Open':
                     plan.date_opened = datetime.now()
                 else:
@@ -180,22 +173,25 @@ class DeleteDepartment(View):
 
 class DeleteUser(View):
     def get(self,request,*args,**kwargs):
+
         user_id = kwargs['user_id']
         user = User.objects.get(id=user_id)
-
         user.delete()
         return HttpResponseRedirect(reverse('users'))
 
 class DeleteActionPlan(View):
     def get(self,request,*args,**kwargs):
-        actionplan_id = kwargs['actionplan_id']
-        actionplan = ActionPlan.objects.get(id=actionplan_id)
-        actionplan.delete()
+
+        if request.user.is_superuser:
+            actionplan_id = kwargs['actionplan_id']
+            actionplan = ActionPlan.objects.get(id=actionplan_id)
+            actionplan.delete()
         return HttpResponseRedirect(reverse('actionplans'))
 
 class EditDepartment(View):
 
     def get(self,request,*args,**kwargs):
+        
         department_id = kwargs['department_id']
         department = Department.objects.get(id=department_id)
         users = User.objects.all()
@@ -274,12 +270,17 @@ class EditActionPlan(View):
         actionplan_id = kwargs['actionplan_id']
         actionplan = ActionPlan.objects.get(id=actionplan_id)
         if request.method == 'GET':
-            form = ActionPlanForm(instance=actionplan)
-            context = {
-                'form':form,
-                'actionplan_id':actionplan_id,
-                'target_date': actionplan.target_date.strftime('%d/%m/%Y') if actionplan.target_date else '',
-            }
+            if request.user.is_superuser:
+                form = ActionPlanForm(instance=actionplan)
+                context = {
+                    'form':form,
+                    'actionplan_id':actionplan_id,
+                    'target_date': actionplan.target_date.strftime('%d/%m/%Y') if actionplan.target_date else '',
+                }
+            else:
+                context = {
+                    'message':'You have no permission to access this page',
+                }
             return render(request,'edit_action_plan.html',context)
 
     def post(self,request,*args,**kwargs):

@@ -29,21 +29,11 @@
 		<label> Target Date</label>
 		<input id="target_date" type="text" name="target_date">
 		<label>Department Name:</label>
-		{%if user.is_superuser%}
-		
-			<select name="department_id">
-				{% for department in departments %}
-					<option value="{{department.id}}">{{department.name}}</option>
-				{% endfor %}
-			</select>
-		{% else %}
-		<select name="department_name">
-			{% for department in user.department_set.all%}
-				<option  value="{{department.name}}">{{department.name}}</option>
+		<select name="department_id">
+			{% for department in departments %}
+				<option value="{{department.id}}">{{department.name}}</option>
 			{% endfor %}
-		</select>	
-		{% endif %}
-			
+		</select>
 		<input type='submit' value='Submit'/>
 	</form>
 </div>
