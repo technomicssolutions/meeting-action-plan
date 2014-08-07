@@ -410,11 +410,14 @@ a:hover , a:focus {
 	float: left;
 }
 .th7 {
-	width: 21% !important;
+	width: 26% !important;
 }
 .th8{
 	width: 9% !important;
 	text-align: center;
+}
+.th9, .th10 {
+	width: 3% !important;
 }
 .th1, .th5, .th6 {
 	width: 6% !important;
