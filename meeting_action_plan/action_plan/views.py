@@ -143,12 +143,18 @@ class AddActionPlanView(View):
                 
                 current_time = datetime.now().time()
                 target_date = target_date.replace(hour=current_time.hour, minute=current_time.minute)
-                
-                department_id = request.POST['department_id']
-                department = Department.objects.get(id=department_id)
-                plan = ActionPlan.objects.latest('id')
-                plan.department = department
-                plan.save()
+                if request.user.is_superuser:
+                    department_id = request.POST['department_id']
+                    department = Department.objects.get(id=department_id)
+                    plan = ActionPlan.objects.latest('id')
+                    plan.department = department
+                    plan.save()
+                else:
+                    department_name = request.POST['department_name']
+                    department = Department.objects.get(name=department_name)
+                    plan = ActionPlan.objects.latest('id')
+                    plan.department =department
+                    plan.save()
                 if plan.status == 'Open':
                     plan.date_opened = datetime.now()
                 else:
